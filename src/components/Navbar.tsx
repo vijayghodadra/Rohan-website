@@ -528,7 +528,7 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
           />
 
-          <div className="fixed top-16 right-3 left-3 max-h-[85vh] overflow-y-auto p-6 rounded-[2.5rem] bg-[#FAF9F5]/98 backdrop-blur-2xl border border-roshan-gold-champagne/50 shadow-2xl animate-in zoom-in-95 duration-150">
+          <div className="fixed top-16 left-1/2 -translate-x-1/2 w-[calc(100%-24px)] max-w-md max-h-[85vh] overflow-y-auto p-5 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] bg-[#FAF9F5]/98 backdrop-blur-2xl border border-roshan-gold-champagne/50 shadow-2xl animate-in zoom-in-95 duration-150">
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between pb-3 border-b border-roshan-taupe-border">
                 <div className="flex items-center gap-2.5">

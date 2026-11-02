@@ -125,7 +125,7 @@ function ProductsContent() {
           </div>
 
           {/* Search & Sort Controls Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 p-4 rounded-2xl bg-white/70 backdrop-blur-xl border border-roshan-gold-champagne/30 shadow-sm">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3.5 sm:gap-4 mb-8 sm:mb-10 p-3.5 sm:p-4 rounded-2xl bg-white/70 backdrop-blur-xl border border-roshan-gold-champagne/30 shadow-sm max-w-md sm:max-w-none mx-auto">
             {/* Search Box */}
             <div className="relative w-full sm:w-80">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-roshan-taupe" />
@@ -134,7 +134,7 @@ function ProductsContent() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search buckets, dinner sets, flasks, mops..."
-                className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm rounded-full bg-white/90 border border-roshan-gold-champagne/40 focus:outline-none focus:border-roshan-crimson focus:ring-1 focus:ring-roshan-crimson text-roshan-obsidian placeholder-roshan-taupe/70 transition-all"
+                className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm rounded-full bg-white/90 border border-roshan-gold-champagne/40 focus:outline-none focus:border-roshan-crimson focus:ring-1 focus:ring-roshan-crimson text-roshan-obsidian placeholder-roshan-taupe/70 transition-all"
               />
             </div>
 
@@ -161,9 +161,9 @@ function ProductsContent() {
           </div>
         </ScrollReveal>
 
-        {/* Product Cards Grid with iPhone Liquid Glass Aesthetic */}
+        {/* Product Cards Grid with Center Lock */}
         {filteredProducts.length === 0 ? (
-          <div className="text-center py-16 p-8 rounded-3xl bg-white/60 border border-dashed border-roshan-gold-champagne/50">
+          <div className="text-center py-16 p-8 rounded-3xl bg-white/60 border border-dashed border-roshan-gold-champagne/50 max-w-md mx-auto">
             <ShoppingBag className="w-12 h-12 text-roshan-taupe/40 mx-auto mb-3" />
             <h3 className="font-serif text-xl font-bold text-roshan-obsidian">No products found</h3>
             <p className="text-xs text-roshan-taupe mt-1">Try clearing your search query or switching categories.</p>
@@ -172,13 +172,13 @@ function ProductsContent() {
                 setSearchQuery('');
                 setSelectedCategory('all');
               }}
-              className="mt-4 px-5 py-2 rounded-full text-xs font-semibold bg-roshan-crimson text-white shadow-sm"
+              className="mt-4 px-5 py-2.5 rounded-full text-xs font-semibold bg-roshan-crimson text-white shadow-sm"
             >
               Reset Filters
             </button>
           </div>
         ) : (
-          <ScrollStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <ScrollStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 max-w-sm sm:max-w-none mx-auto">
             {filteredProducts.map((product) => {
               const selectedColor = selectedColorMap[product.id] || product.colors[0];
               const discountPercent = Math.round(
@@ -188,7 +188,7 @@ function ProductsContent() {
               return (
                 <ScrollStaggerItem key={product.id}>
                   <div
-                    className="group relative rounded-3xl bg-white/80 backdrop-blur-xl border border-roshan-gold-champagne/40 hover:border-roshan-crimson/50 shadow-glass-sm hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col justify-between h-full"
+                    className="group relative rounded-[2rem] sm:rounded-3xl bg-white/80 backdrop-blur-xl border border-roshan-gold-champagne/40 hover:border-roshan-crimson/50 shadow-glass-sm hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col justify-between h-full"
                   >
                   {/* Liquid Glass Hover Sheen */}
                   <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-transparent via-white/20 to-transparent" />

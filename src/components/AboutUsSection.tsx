@@ -97,11 +97,11 @@ export default function AboutUsSection() {
         </ScrollReveal>
 
         {/* 1. VISION & MISSION TAB CONTENT */}
-        <div id="vision-mission" className={`space-y-12 ${activeTab === 'vision' ? 'block' : 'hidden md:block md:mb-16'}`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div id="vision-mission" className={`space-y-8 sm:space-y-12 ${activeTab === 'vision' ? 'block' : 'hidden md:block md:mb-16'}`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-md md:max-w-none mx-auto">
             {/* Vision Liquid Glass Card */}
             <ScrollReveal direction="up" delay={0.1} duration={0.85} distance={32}>
-              <div className="relative p-8 rounded-3xl bg-white/80 backdrop-blur-2xl border border-roshan-gold-champagne/50 shadow-glass-lg hover:shadow-2xl transition-all duration-500 group h-full">
+              <div className="relative p-6 sm:p-8 rounded-[2rem] sm:rounded-3xl bg-white/80 backdrop-blur-2xl border border-roshan-gold-champagne/50 shadow-glass-lg hover:shadow-2xl transition-all duration-500 group h-full flex flex-col items-center md:items-start text-center md:text-left">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-roshan-crimson to-roshan-crimson-light text-white flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform">
                   <Target className="w-7 h-7" />
                 </div>
@@ -112,7 +112,7 @@ export default function AboutUsSection() {
                 <p className="text-sm sm:text-base text-roshan-taupe leading-relaxed mb-6">
                   {VISION_MISSION.vision.description}
                 </p>
-                <div className="space-y-3 pt-4 border-t border-roshan-taupe-border">
+                <div className="space-y-3 pt-4 border-t border-roshan-taupe-border w-full text-left">
                   {VISION_MISSION.vision.pillars.map((pillar, idx) => (
                     <div key={idx} className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-roshan-crimson shrink-0 mt-0.5" />
@@ -128,7 +128,7 @@ export default function AboutUsSection() {
 
             {/* Mission Liquid Glass Card */}
             <ScrollReveal direction="up" delay={0.2} duration={0.85} distance={32}>
-              <div className="relative p-8 rounded-3xl bg-white/80 backdrop-blur-2xl border border-roshan-gold-champagne/50 shadow-glass-lg hover:shadow-2xl transition-all duration-500 group h-full">
+              <div className="relative p-6 sm:p-8 rounded-[2rem] sm:rounded-3xl bg-white/80 backdrop-blur-2xl border border-roshan-gold-champagne/50 shadow-glass-lg hover:shadow-2xl transition-all duration-500 group h-full flex flex-col items-center md:items-start text-center md:text-left">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-roshan-gold-deep to-roshan-gold text-white flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform">
                   <Compass className="w-7 h-7" />
                 </div>
@@ -139,7 +139,7 @@ export default function AboutUsSection() {
                 <p className="text-sm sm:text-base text-roshan-taupe leading-relaxed mb-6">
                   {VISION_MISSION.mission.description}
                 </p>
-                <div className="space-y-3 pt-4 border-t border-roshan-taupe-border">
+                <div className="space-y-3 pt-4 border-t border-roshan-taupe-border w-full text-left">
                   {VISION_MISSION.mission.commitments.map((commit, idx) => (
                     <div key={idx} className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-roshan-gold-deep shrink-0 mt-0.5" />
@@ -158,26 +158,26 @@ export default function AboutUsSection() {
         {/* 2. MANUFACTURING FACILITY TAB CONTENT */}
         <div id="manufacturing" className={`pt-8 ${activeTab === 'manufacturing' ? 'block' : 'hidden md:block md:mb-16'}`}>
           <ScrollReveal duration={0.95} distance={40} amount={0.1}>
-            <div className="p-8 sm:p-12 rounded-[2.5rem] bg-gradient-to-br from-[#1B1512] via-[#2A1E18] to-[#1B1512] text-white shadow-2xl relative overflow-hidden">
+            <div className="p-6 sm:p-12 rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-[#1B1512] via-[#2A1E18] to-[#1B1512] text-white shadow-2xl relative overflow-hidden">
               {/* Background specular lighting */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-roshan-crimson/20 rounded-full blur-[100px] pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-80 h-80 bg-roshan-gold/15 rounded-full blur-[90px] pointer-events-none" />
 
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                <div className="lg:col-span-6 space-y-6">
+              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center">
+                <div className="lg:col-span-6 space-y-5 sm:space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
                   <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-roshan-gold/40 text-xs font-bold text-roshan-gold tracking-wider uppercase">
                     <Factory className="w-3.5 h-3.5" />
                     <span>Vadodara Industrial Hub</span>
                   </div>
-                  <h3 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                  <h3 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-white">
                     {MANUFACTURING_DETAILS.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-roshan-gold-sand/80 leading-relaxed font-sans">
+                  <p className="text-xs sm:text-base text-roshan-gold-sand/80 leading-relaxed font-sans max-w-xl">
                     {MANUFACTURING_DETAILS.description}
                   </p>
 
                   {/* Facility Technical Specifications Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2 sm:pt-4 w-full text-center sm:text-left">
                     {MANUFACTURING_DETAILS.facilitySpecs.map((spec, i) => (
                       <div key={i} className="p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-roshan-gold/50 transition-colors">
                         <div className="text-xs font-semibold text-roshan-gold-champagne">{spec.title}</div>
@@ -189,8 +189,8 @@ export default function AboutUsSection() {
                 </div>
 
                 {/* Manufacturing Facility Image Container */}
-                <div className="lg:col-span-6 space-y-6">
-                  <div className="relative aspect-video w-full rounded-3xl overflow-hidden border border-roshan-gold-champagne/30 shadow-2xl group">
+                <div className="lg:col-span-6 space-y-4 sm:space-y-6">
+                  <div className="relative aspect-video w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-roshan-gold-champagne/30 shadow-2xl group">
                     <Image
                       src="/images/facility.jpg"
                       alt="Roshan Manufacturing Plant Vadodara"
@@ -198,22 +198,22 @@ export default function AboutUsSection() {
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-roshan-obsidian/80 via-transparent to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-black/60 backdrop-blur-xl border border-white/20">
+                    <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-black/60 backdrop-blur-xl border border-white/20">
                       <div className="text-xs font-bold text-roshan-gold">Automated Injection Cells</div>
                       <div className="text-[11px] text-gray-200">28+ servo-hydraulic injection machines running 24/7 with robotic extraction</div>
                     </div>
                   </div>
 
                   {/* 5-Step Process Timeline */}
-                  <div className="p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10">
+                  <div className="p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-center sm:text-left">
                     <div className="text-xs font-bold uppercase tracking-wider text-roshan-gold mb-3">
                       5-Stage Quality Engineering Workflow
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                       {MANUFACTURING_DETAILS.processes.map((p, idx) => (
-                        <div key={idx} className="p-2.5 rounded-xl bg-white/5 border border-white/5 text-center">
+                        <div key={idx} className="p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/5 text-center">
                           <span className="text-xs font-bold text-roshan-crimson-light">{p.step}</span>
-                          <div className="text-[11px] font-semibold text-white mt-0.5 line-clamp-1">{p.name}</div>
+                          <div className="text-[10px] sm:text-[11px] font-semibold text-white mt-0.5 line-clamp-1">{p.name}</div>
                         </div>
                       ))}
                     </div>
@@ -231,20 +231,20 @@ export default function AboutUsSection() {
               <div className="text-xs font-bold uppercase tracking-wider text-roshan-crimson mb-1">
                 Distribution Network
               </div>
-              <h3 className="font-serif text-3xl font-bold text-roshan-obsidian">
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-roshan-obsidian">
                 {CUSTOMERS_REACH.title}
               </h3>
-              <p className="text-sm text-roshan-taupe mt-2">
+              <p className="text-xs sm:text-sm text-roshan-taupe mt-2">
                 {CUSTOMERS_REACH.description}
               </p>
             </ScrollReveal>
 
-            {/* Reach Coverage Cards with Stagger */}
-            <ScrollStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Reach Coverage Cards with Center Lock */}
+            <ScrollStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-md sm:max-w-none mx-auto">
               {CUSTOMERS_REACH.presenceStats.map((item, i) => (
                 <ScrollStaggerItem key={i}>
-                  <div className="p-6 rounded-3xl bg-white/85 backdrop-blur-xl border border-roshan-gold-champagne/40 shadow-glass-sm hover:shadow-glass-lg transition-all h-full">
-                    <div className="flex items-center justify-between mb-3">
+                  <div className="p-6 rounded-[2rem] sm:rounded-3xl bg-white/85 backdrop-blur-xl border border-roshan-gold-champagne/40 shadow-glass-sm hover:shadow-glass-lg transition-all h-full text-center sm:text-left flex flex-col items-center sm:items-start">
+                    <div className="flex items-center justify-between w-full mb-3">
                       <span className="p-2 rounded-xl bg-roshan-crimson/10 text-roshan-crimson">
                         <MapPin className="w-5 h-5" />
                       </span>
@@ -264,11 +264,11 @@ export default function AboutUsSection() {
               <ScrollReveal duration={0.8} distance={25} className="text-xs font-bold uppercase tracking-wider text-center text-roshan-gold-deep mb-6">
                 What Retail Partners & Homemakers Say
               </ScrollReveal>
-              <ScrollStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <ScrollStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-md md:max-w-none mx-auto">
                 {REVIEWS.map((rev) => (
                   <ScrollStaggerItem key={rev.id}>
-                    <div className="p-6 rounded-3xl bg-white/90 backdrop-blur-xl border border-roshan-gold-champagne/30 shadow-sm flex flex-col justify-between h-full">
-                      <div>
+                    <div className="p-6 rounded-[2rem] sm:rounded-3xl bg-white/90 backdrop-blur-xl border border-roshan-gold-champagne/30 shadow-sm flex flex-col justify-between h-full text-center sm:text-left">
+                      <div className="flex flex-col items-center sm:items-start">
                         <div className="flex items-center gap-1 text-roshan-amber mb-3">
                           {[...Array(rev.rating)].map((_, i) => (
                             <Star key={i} className="w-3.5 h-3.5 fill-current" />
@@ -280,7 +280,7 @@ export default function AboutUsSection() {
                       </div>
                       <div className="mt-4 pt-3 border-t border-roshan-taupe-border">
                         <div className="text-xs font-bold text-roshan-obsidian">{rev.author}</div>
-                        <div className="text-[11px] text-roshan-taupe flex items-center justify-between">
+                        <div className="text-[11px] text-roshan-taupe flex items-center justify-between mt-0.5">
                           <span>{rev.location}</span>
                           {rev.verified && <span className="text-roshan-green font-semibold">✓ Verified</span>}
                         </div>
@@ -300,21 +300,21 @@ export default function AboutUsSection() {
               <Award className="w-3.5 h-3.5" />
               <span>Board of Directors</span>
             </div>
-            <h3 className="font-serif text-3xl font-bold text-roshan-obsidian">
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-roshan-obsidian">
               Pioneering Leadership Steering Roshan&apos;s Growth
             </h3>
-            <p className="text-sm text-roshan-taupe mt-2">
+            <p className="text-xs sm:text-sm text-roshan-taupe mt-2">
               Combining decades of industrial tooling mastery, manufacturing discipline, and nationwide retail execution.
             </p>
           </ScrollReveal>
 
-          <ScrollStagger className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <ScrollStagger className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-md md:max-w-none mx-auto">
             {DIRECTORS.map((director, i) => (
               <ScrollStaggerItem key={i}>
-                <div className="relative p-8 rounded-3xl bg-white/90 backdrop-blur-2xl border border-roshan-gold-champagne/50 shadow-glass-sm hover:shadow-2xl transition-all duration-500 flex flex-col justify-between group h-full">
-                  <div>
+                <div className="relative p-6 sm:p-8 rounded-[2rem] sm:rounded-3xl bg-white/90 backdrop-blur-2xl border border-roshan-gold-champagne/50 shadow-glass-sm hover:shadow-2xl transition-all duration-500 flex flex-col justify-between group h-full text-center md:text-left items-center md:items-start">
+                  <div className="flex flex-col items-center md:items-start w-full">
                     {/* Director Avatar / Monogram */}
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-roshan-obsidian to-roshan-crimson text-roshan-gold font-serif text-xl font-bold flex items-center justify-center shadow-lg border border-roshan-gold/40 mb-6 group-hover:scale-105 transition-transform">
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-roshan-obsidian to-roshan-crimson text-roshan-gold font-serif text-xl font-bold flex items-center justify-center shadow-lg border border-roshan-gold/40 mb-6 group-hover:scale-105 transition-transform mx-auto md:mx-0">
                       {director.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}
                     </div>
 
@@ -334,10 +334,10 @@ export default function AboutUsSection() {
                   </div>
 
                   {/* Highlights */}
-                  <div className="mt-6 pt-4 border-t border-roshan-taupe-border space-y-2">
+                  <div className="mt-6 pt-4 border-t border-roshan-taupe-border space-y-2 w-full text-left">
                     {director.highlights.map((h, idx) => (
                       <div key={idx} className="flex items-center gap-2 text-xs text-roshan-obsidian font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-roshan-gold" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-roshan-gold shrink-0" />
                         <span>{h}</span>
                       </div>
                     ))}

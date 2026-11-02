@@ -46,38 +46,38 @@ export default function CapabilitiesSection() {
         </ScrollReveal>
 
         {/* 1. HOUSEHOLD PLASTIC PRODUCTS CAPABILITY */}
-        <div id="household-plastics" className="mb-20">
+        <div id="household-plastics" className="mb-14 sm:mb-20">
           <ScrollReveal duration={0.95} distance={40} amount={0.1}>
-            <div className="p-8 sm:p-12 rounded-[2.5rem] bg-[#FAF9F5] border border-roshan-gold-champagne/50 shadow-glass-lg relative overflow-hidden">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="p-6 sm:p-12 rounded-[2rem] sm:rounded-[2.5rem] bg-[#FAF9F5] border border-roshan-gold-champagne/50 shadow-glass-lg relative overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center">
                 
-                <div className="lg:col-span-5 space-y-6">
+                <div className="lg:col-span-5 space-y-5 sm:space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-roshan-crimson/10 text-roshan-crimson text-xs font-bold uppercase tracking-wider">
                     <Box className="w-3.5 h-3.5" />
                     <span>{CAPABILITIES.householdProducts.badge}</span>
                   </div>
-                  <h3 className="font-serif text-3xl sm:text-4xl font-bold text-roshan-obsidian">
+                  <h3 className="font-serif text-2xl sm:text-4xl font-bold text-roshan-obsidian">
                     {CAPABILITIES.householdProducts.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-roshan-taupe leading-relaxed">
+                  <p className="text-xs sm:text-base text-roshan-taupe leading-relaxed max-w-xl">
                     {CAPABILITIES.householdProducts.description}
                   </p>
 
-                  <div className="space-y-3 pt-2">
+                  <div className="space-y-3 pt-2 w-full max-w-md mx-auto lg:mx-0 text-left">
                     {CAPABILITIES.householdProducts.qualityFeatures.map((feat, idx) => (
                       <div key={idx} className="flex items-center gap-3">
                         <div className="w-5 h-5 rounded-full bg-roshan-crimson text-white flex items-center justify-center text-xs font-bold shrink-0">
                           ✓
                         </div>
-                        <span className="text-sm font-semibold text-roshan-obsidian">{feat}</span>
+                        <span className="text-xs sm:text-sm font-semibold text-roshan-obsidian">{feat}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="pt-4">
+                  <div className="pt-2 sm:pt-4 w-full sm:w-auto">
                     <Link
                       href="/products"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-roshan-crimson to-roshan-crimson-light shadow-liquid-crimson hover:shadow-lg transition-all"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-roshan-crimson to-roshan-crimson-light shadow-liquid-crimson hover:shadow-lg transition-all"
                     >
                       <span>Browse Retail Catalog</span>
                       <ArrowRight className="w-4 h-4" />
@@ -85,32 +85,32 @@ export default function CapabilitiesSection() {
                   </div>
                 </div>
 
-                {/* Product Range Cards */}
-                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Product Range Cards with Center Lock */}
+                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto w-full">
                   {CAPABILITIES.householdProducts.categoriesCovered.map((cat, i) => (
                     <div
                       key={i}
-                      className="p-5 rounded-2xl bg-white/90 backdrop-blur-xl border border-roshan-gold-champagne/30 shadow-sm hover:shadow-md transition-all group"
+                      className="p-5 rounded-2xl bg-white/90 backdrop-blur-xl border border-roshan-gold-champagne/30 shadow-sm hover:shadow-md transition-all group text-center sm:text-left"
                     >
                       <div className="text-xs font-bold text-roshan-crimson uppercase tracking-wider mb-1">
                         Range 0{i + 1}
                       </div>
-                      <h4 className="font-serif text-lg font-bold text-roshan-obsidian group-hover:text-roshan-crimson transition-colors">
+                      <h4 className="font-serif text-base sm:text-lg font-bold text-roshan-obsidian group-hover:text-roshan-crimson transition-colors">
                         {cat.name}
                       </h4>
-                      <p className="text-xs text-roshan-taupe mt-2 leading-relaxed">
+                      <p className="text-xs text-roshan-taupe mt-1.5 leading-relaxed">
                         {cat.summary}
                       </p>
                     </div>
                   ))}
 
                   {/* Additional Spec Highlight */}
-                  <div className="p-5 rounded-2xl bg-gradient-to-br from-roshan-obsidian to-roshan-crimson text-white shadow-md flex flex-col justify-between">
+                  <div className="p-5 rounded-2xl bg-gradient-to-br from-roshan-obsidian to-roshan-crimson text-white shadow-md flex flex-col justify-between text-center sm:text-left">
                     <div>
                       <span className="text-xs font-bold text-roshan-gold uppercase tracking-wider">
                         Polymer Integrity
                       </span>
-                      <div className="font-serif text-lg font-bold mt-1">100% Virgin Grade Only</div>
+                      <div className="font-serif text-base sm:text-lg font-bold mt-1">100% Virgin Grade Only</div>
                       <p className="text-xs text-roshan-gold-sand/80 mt-1 leading-relaxed">
                         Zero regrind adulteration on all consumer food-contact and bathroom ranges.
                       </p>
@@ -129,26 +129,26 @@ export default function CapabilitiesSection() {
         {/* 2. CONTRACT MANUFACTURING (OEM / ODM) CAPABILITY */}
         <div id="contract-manufacturing">
           <ScrollReveal duration={0.95} distance={40} amount={0.1}>
-            <div className="p-8 sm:p-12 rounded-[2.5rem] bg-gradient-to-br from-[#1B1512] via-[#2A1E18] to-[#1B1512] text-white shadow-2xl relative overflow-hidden">
+            <div className="p-6 sm:p-12 rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-[#1B1512] via-[#2A1E18] to-[#1B1512] text-white shadow-2xl relative overflow-hidden">
               
               {/* Ambient specular highlight */}
               <div className="absolute -top-24 -right-24 w-96 h-96 bg-roshan-gold/15 rounded-full blur-[100px] pointer-events-none" />
 
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center">
                 
-                <div className="lg:col-span-5 space-y-6">
+                <div className="lg:col-span-5 space-y-5 sm:space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
                   <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-roshan-gold/40 text-xs font-bold text-roshan-gold tracking-wider uppercase">
                     <Wrench className="w-3.5 h-3.5" />
                     <span>{CAPABILITIES.contractManufacturing.badge}</span>
                   </div>
-                  <h3 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                  <h3 className="font-serif text-2xl sm:text-4xl font-bold tracking-tight text-white">
                     {CAPABILITIES.contractManufacturing.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-roshan-gold-sand/80 leading-relaxed font-sans">
+                  <p className="text-xs sm:text-base text-roshan-gold-sand/80 leading-relaxed font-sans max-w-xl">
                     {CAPABILITIES.contractManufacturing.description}
                   </p>
 
-                  <div className="space-y-3 pt-2">
+                  <div className="space-y-3 pt-2 w-full max-w-md mx-auto lg:mx-0 text-left">
                     {CAPABILITIES.contractManufacturing.b2bHighlights.map((hl, idx) => (
                       <div key={idx} className="flex items-start gap-3">
                         <div className="w-5 h-5 rounded-full bg-roshan-gold text-roshan-obsidian flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
@@ -159,14 +159,14 @@ export default function CapabilitiesSection() {
                     ))}
                   </div>
 
-                  <div className="pt-4 flex flex-wrap gap-4">
+                  <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row w-full sm:w-auto items-center justify-center lg:justify-start gap-3 sm:gap-4">
                     <a
                       href={`https://wa.me/${COMPANY_INFO.whatsappRaw}?text=${encodeURIComponent(
                         'Hello Roshan team, I am interested in discussing Contract Manufacturing / OEM tooling solutions.'
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold text-roshan-obsidian bg-roshan-gold hover:bg-roshan-gold-champagne shadow-liquid-glow transition-all active:scale-95"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold text-roshan-obsidian bg-roshan-gold hover:bg-roshan-gold-champagne shadow-liquid-glow transition-all active:scale-95"
                     >
                       <span>Request OEM Consultation</span>
                       <ArrowRight className="w-4 h-4" />
@@ -174,27 +174,27 @@ export default function CapabilitiesSection() {
 
                     <Link
                       href="/contact"
-                      className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full text-sm font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all"
                     >
                       <span>Send RFQ Details</span>
                     </Link>
                   </div>
                 </div>
 
-                {/* B2B OEM Services Grid */}
-                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* B2B OEM Services Grid with Center Lock */}
+                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto w-full">
                   {CAPABILITIES.contractManufacturing.services.map((srv, i) => (
                     <div
                       key={i}
-                      className="p-5 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-roshan-gold/50 transition-colors"
+                      className="p-5 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-roshan-gold/50 transition-colors text-center sm:text-left"
                     >
                       <div className="text-xs font-bold text-roshan-gold-champagne uppercase tracking-wider mb-1">
                         Step 0{i + 1}
                       </div>
-                      <h4 className="font-serif text-lg font-bold text-white">
+                      <h4 className="font-serif text-base sm:text-lg font-bold text-white">
                         {srv.title}
                       </h4>
-                      <p className="text-xs text-gray-300 mt-2 leading-relaxed">
+                      <p className="text-xs text-gray-300 mt-1.5 leading-relaxed">
                         {srv.desc}
                       </p>
                     </div>

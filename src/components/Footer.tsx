@@ -39,7 +39,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-white/10">
           
           {/* Brand Col (lg:col-span-4) */}
-          <div className="sm:col-span-2 lg:col-span-4 space-y-4">
+          <div className="sm:col-span-2 lg:col-span-4 space-y-4 flex flex-col items-center sm:items-start text-center sm:text-left">
             <Link href="/" className="inline-flex items-center gap-3.5 group">
               <div className="relative overflow-hidden rounded-xl border border-roshan-gold/40 shadow-md group-hover:scale-105 group-hover:border-roshan-gold transition-all duration-300 bg-[#BD0100] px-2.5 py-1.5 flex items-center justify-center">
                 <Image
@@ -50,7 +50,7 @@ export default function Footer() {
                   className="h-9 sm:h-11 w-auto object-contain"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col text-left">
                 <span className="font-serif text-2xl sm:text-3xl font-extrabold tracking-tight text-white group-hover:text-roshan-gold-champagne transition-colors">
                   ROSHAN
                 </span>
@@ -64,7 +64,7 @@ export default function Footer() {
               Vadodara’s premier manufacturer of unbreakable homeware, luxury bathroom suites, and precision polymer components. Engineered with 100% virgin-grade polymer for modern Indian households.
             </p>
 
-            <div className="pt-2 flex flex-wrap gap-2 text-[11px] text-gray-300">
+            <div className="pt-2 flex flex-wrap justify-center sm:justify-start gap-2 text-[11px] text-gray-300">
               <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 flex items-center gap-1.5 hover:border-roshan-gold/40 transition-colors">
                 <ShieldCheck className="w-3.5 h-3.5 text-roshan-green" />
                 <span>100% Virgin Polymer</span>

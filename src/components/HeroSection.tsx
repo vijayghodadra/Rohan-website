@@ -39,15 +39,15 @@ export default function HeroSection() {
       </div>
 
       {/* 3. Main Hero Content Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-32 pb-20 lg:pt-36 lg:pb-28">
-        <ScrollReveal duration={1.1} distance={32} delay={0.1} className="max-w-3xl flex flex-col gap-6 text-left">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-28">
+        <ScrollReveal duration={1.1} distance={32} delay={0.1} className="max-w-3xl flex flex-col gap-5 sm:gap-6 text-center lg:text-left items-center lg:items-start mx-auto lg:mx-0">
           {/* Main Headline with Serif Caslon Elegance */}
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.12]">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.16]">
             Everyday homeware,{' '}
             <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-roshan-crimson-light via-[#E3C687] to-roshan-gold">
               manufactured
               <svg
-                className="absolute -bottom-2 left-0 w-full h-3 text-roshan-gold-champagne/80"
+                className="absolute -bottom-2 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 w-full h-3 text-roshan-gold-champagne/80"
                 viewBox="0 0 100 12"
                 preserveAspectRatio="none"
                 fill="none"
@@ -64,16 +64,16 @@ export default function HeroSection() {
           </h1>
 
           {/* Descriptive Tagline */}
-          <p className="text-base sm:text-lg text-gray-200 leading-relaxed font-sans max-w-2xl font-normal drop-shadow-sm">
+          <p className="text-xs sm:text-base lg:text-lg text-gray-200 leading-relaxed font-sans max-w-2xl font-normal drop-shadow-sm mx-auto lg:mx-0">
             From unbreakable bathroom suites and durable kitchen prep essentials to precision OEM contract manufacturing — crafted with{' '}
             <strong className="text-white font-semibold">100% virgin-grade polymer</strong> at our 85,000 sq.ft facility in Vadodara, Gujarat.
           </p>
 
           {/* Action CTAs with Liquid Shimmer & Glass Styling */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
             <Link
               href="/products"
-              className="relative overflow-hidden group px-7 py-3.5 rounded-full font-semibold text-sm text-white bg-gradient-to-r from-roshan-crimson via-roshan-crimson-light to-roshan-crimson shadow-liquid-crimson hover:shadow-xl transition-all duration-300 active:scale-95 flex items-center gap-2"
+              className="w-full sm:w-auto relative overflow-hidden group px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-roshan-crimson via-roshan-crimson-light to-roshan-crimson shadow-liquid-crimson hover:shadow-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/35 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
               <span>Explore Products</span>
@@ -82,7 +82,7 @@ export default function HeroSection() {
 
             <Link
               href="#contract-manufacturing"
-              className="px-6 py-3.5 rounded-full font-semibold text-sm text-white bg-white/15 backdrop-blur-xl border border-white/30 hover:bg-white/25 hover:border-roshan-gold transition-all duration-300 flex items-center gap-2 shadow-sm"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-full font-semibold text-xs sm:text-sm text-white bg-white/15 backdrop-blur-xl border border-white/30 hover:bg-white/25 hover:border-roshan-gold transition-all duration-300 flex items-center justify-center gap-2 shadow-sm"
             >
               <Factory className="w-4 h-4 text-roshan-gold" />
               <span>Contract Manufacturing</span>
@@ -94,7 +94,7 @@ export default function HeroSection() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-semibold uppercase tracking-wider text-roshan-gold-champagne hover:text-white transition-colors flex items-center gap-1.5 px-3 py-2"
+              className="text-xs font-semibold uppercase tracking-wider text-roshan-gold-champagne hover:text-white transition-colors flex items-center justify-center gap-1.5 px-3 py-2"
             >
               <MessageCircle className="w-4 h-4 text-green-400" />
               <span>WhatsApp Inquiry</span>
@@ -102,7 +102,7 @@ export default function HeroSection() {
           </div>
 
           {/* Customer Rating Proof */}
-          <div className="flex items-center gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2.5 sm:gap-4 pt-2 text-center sm:text-left">
             <div className="flex -space-x-2">
               <div className="w-8 h-8 rounded-full bg-roshan-crimson text-white text-xs font-bold flex items-center justify-center border-2 border-[#1B1512]">
                 SK
@@ -115,44 +115,44 @@ export default function HeroSection() {
               </div>
             </div>
             <div className="text-xs text-gray-300">
-              <div className="flex items-center gap-1 text-roshan-amber">
+              <div className="flex items-center justify-center sm:justify-start gap-1 text-roshan-amber">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-3.5 h-3.5 fill-current" />
                 ))}
                 <span className="font-bold text-white ml-1">4.9 / 5.0</span>
               </div>
-              <span className="text-gray-300">Trusted by over 12,000+ retail stores & households</span>
+              <span className="text-gray-300 text-[11px] sm:text-xs">Trusted by over 12,000+ retail stores & households</span>
             </div>
           </div>
 
-          {/* 4. Clean Integrated Bottom Trust Bar (Zero Clutter, No Overlapping Capsules) */}
-          <div className="mt-6 pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15">
-              <div className="flex items-center gap-2">
+          {/* 4. Clean Integrated Bottom Trust Bar (Zero Clutter, Center Locked) */}
+          <div className="mt-4 sm:mt-6 pt-5 sm:pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 w-full">
+            <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 flex flex-col items-center sm:items-start text-center sm:text-left">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <ShieldCheck className="w-4 h-4 text-roshan-green shrink-0" />
                 <span className="text-xs font-bold text-white">100% Virgin</span>
               </div>
               <div className="text-[10px] text-gray-300 mt-0.5">Zero regrind polymer</div>
             </div>
 
-            <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15">
-              <div className="flex items-center gap-2">
+            <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 flex flex-col items-center sm:items-start text-center sm:text-left">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <Truck className="w-4 h-4 text-roshan-gold shrink-0" />
                 <span className="text-xs font-bold text-white">24+ States</span>
               </div>
               <div className="text-[10px] text-gray-300 mt-0.5">Pan-India distribution</div>
             </div>
 
-            <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15">
-              <div className="flex items-center gap-2">
+            <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 flex flex-col items-center sm:items-start text-center sm:text-left">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <Layers className="w-4 h-4 text-roshan-crimson-light shrink-0" />
                 <span className="text-xs font-bold text-white">650T / Mo.</span>
               </div>
               <div className="text-[10px] text-gray-300 mt-0.5">80T - 950T injection lines</div>
             </div>
 
-            <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15">
-              <div className="flex items-center gap-2">
+            <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 flex flex-col items-center sm:items-start text-center sm:text-left">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <Factory className="w-4 h-4 text-roshan-gold-champagne shrink-0" />
                 <span className="text-xs font-bold text-white">ISO 9001:2015</span>
               </div>

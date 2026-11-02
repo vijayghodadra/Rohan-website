@@ -29,26 +29,26 @@ export default function FeaturedProductsPreview() {
         
         {/* Section Header with Lazy Reveal */}
         <ScrollReveal duration={0.9} distance={36} amount={0.12}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div className="max-w-2xl">
+          <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 mb-10 sm:mb-12 text-center md:text-left">
+            <div className="max-w-2xl flex flex-col items-center md:items-start">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-roshan-crimson-blush text-roshan-crimson text-xs font-semibold mb-3 border border-roshan-crimson/20">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Signature Flagship Range</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-roshan-obsidian tracking-tight">
+              <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold text-roshan-obsidian tracking-tight">
                 Curated everyday essentials,{' '}
                 <span className="italic text-roshan-crimson font-normal">unbreakable luxury.</span>
               </h2>
-              <p className="text-sm sm:text-base text-roshan-taupe mt-3 leading-relaxed">
+              <p className="text-xs sm:text-base text-roshan-taupe mt-3 leading-relaxed max-w-xl">
                 Engineered with 100% virgin-grade polymer at our Vadodara manufacturing plant. Explore our signature pieces or browse the complete 18+ product store.
               </p>
             </div>
 
             {/* Direct CTA to dedicated products page */}
-            <div className="shrink-0 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="w-full sm:w-auto shrink-0 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <Link
                 href="/products"
-                className="px-6 py-3 rounded-full font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-roshan-crimson via-roshan-crimson-light to-roshan-crimson shadow-liquid-crimson hover:shadow-lg transition-all flex items-center justify-center gap-2 group"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-full font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-roshan-crimson via-roshan-crimson-light to-roshan-crimson shadow-liquid-crimson hover:shadow-lg transition-all flex items-center justify-center gap-2 group"
               >
                 <span>Explore All Products ({PRODUCTS.length})</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -57,8 +57,8 @@ export default function FeaturedProductsPreview() {
           </div>
         </ScrollReveal>
 
-        {/* 4 Featured Products Cards with Staggered Reveal */}
-        <ScrollStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 4 Featured Products Cards with Center Lock */}
+        <ScrollStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-sm sm:max-w-none mx-auto">
           {featured.map((product) => {
             const discountPercent = Math.round(
               ((product.originalPrice - product.price) / product.originalPrice) * 100
@@ -66,7 +66,7 @@ export default function FeaturedProductsPreview() {
 
             return (
               <ScrollStaggerItem key={product.id}>
-                <div className="group relative rounded-3xl bg-white/90 backdrop-blur-xl border border-roshan-gold-champagne/40 shadow-xs hover:shadow-xl hover:border-roshan-gold-champagne/80 transition-all duration-300 flex flex-col overflow-hidden h-full">
+                <div className="group relative rounded-[2rem] sm:rounded-3xl bg-white/90 backdrop-blur-xl border border-roshan-gold-champagne/40 shadow-xs hover:shadow-xl hover:border-roshan-gold-champagne/80 transition-all duration-300 flex flex-col overflow-hidden h-full">
                   {/* Product Image */}
                   <div className="relative aspect-4/3 w-full bg-roshan-sand/20 overflow-hidden">
                     <Image
@@ -168,34 +168,34 @@ export default function FeaturedProductsPreview() {
           })}
         </ScrollStagger>
 
-        {/* Category Navigation Banner with Reveal */}
+        {/* Category Navigation Banner with Reveal & Center Lock */}
         <ScrollReveal duration={0.9} distance={30} amount={0.15}>
-          <div className="mt-12 p-6 rounded-3xl bg-gradient-to-r from-roshan-obsidian via-[#2A1E18] to-roshan-obsidian text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl border border-roshan-gold/30">
+          <div className="mt-10 sm:mt-12 p-6 sm:p-8 rounded-[2rem] sm:rounded-3xl bg-gradient-to-r from-roshan-obsidian via-[#2A1E18] to-roshan-obsidian text-white flex flex-col md:flex-row items-center text-center md:text-left justify-between gap-5 sm:gap-6 shadow-xl border border-roshan-gold/30">
             <div>
-              <div className="font-serif text-xl font-bold">Looking for specific product categories?</div>
+              <div className="font-serif text-lg sm:text-xl font-bold">Looking for specific product categories?</div>
               <p className="text-xs text-roshan-gold-sand/80 mt-1">
                 Filter our 18+ high-durability products by category on our dedicated store.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 w-full md:w-auto">
               <Link
                 href="/products?category=bathroom"
-                className="px-5 py-2.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all flex items-center gap-2"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all flex items-center justify-center gap-2"
               >
                 <Bath className="w-4 h-4 text-roshan-gold" />
                 <span>Bathroom Products (7)</span>
               </Link>
               <Link
                 href="/products?category=household"
-                className="px-5 py-2.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all flex items-center gap-2"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all flex items-center justify-center gap-2"
               >
                 <Home className="w-4 h-4 text-roshan-gold" />
                 <span>Household & Kitchen (11)</span>
               </Link>
               <Link
                 href="/products"
-                className="px-5 py-2.5 rounded-full text-xs font-semibold bg-roshan-crimson hover:bg-roshan-crimson-light text-white transition-all flex items-center gap-1.5 shadow-sm"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-full text-xs font-semibold bg-roshan-crimson hover:bg-roshan-crimson-light text-white transition-all flex items-center justify-center gap-1.5 shadow-sm"
               >
                 <span>View All 18+</span>
                 <ArrowRight className="w-3.5 h-3.5" />

@@ -77,11 +77,11 @@ export default function ContactSection() {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 max-w-xl lg:max-w-none mx-auto">
           
           {/* Left Column: Official Contact Details */}
           <ScrollReveal direction="up" delay={0.1} duration={0.9} distance={35} className="lg:col-span-5 space-y-6">
-            <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-roshan-obsidian via-[#2A1E18] to-roshan-obsidian text-white shadow-xl relative overflow-hidden">
+            <div className="p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br from-roshan-obsidian via-[#2A1E18] to-roshan-obsidian text-white shadow-xl relative overflow-hidden">
               <div className="text-xs font-bold uppercase tracking-wider text-roshan-gold mb-2">
                 Corporate Headquarters
               </div>
@@ -164,7 +164,7 @@ export default function ContactSection() {
 
           {/* Right Column: Liquid Glass Send Inquiry / Place an Order Form */}
           <ScrollReveal direction="up" delay={0.2} duration={0.9} distance={35} className="lg:col-span-7">
-            <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/90 backdrop-blur-2xl border border-roshan-gold-champagne/60 shadow-glass-lg">
+            <div className="p-6 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] bg-white/90 backdrop-blur-2xl border border-roshan-gold-champagne/60 shadow-glass-lg">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="font-serif text-2xl font-bold text-roshan-obsidian">

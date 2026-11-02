@@ -12,6 +12,8 @@ html {
   font-family: var(--font-inter);
   background-color: #FAF9F5;
   color: #1B1512;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -19,6 +21,10 @@ body {
   background-color: #FAF9F5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+button, a {
+  touch-action: manipulation;
 }
 
 /* Custom iPhone Liquid Glass Utilities */
@@ -101,11 +107,13 @@ body {
   }
 }
 
-/* Scrolled State: Small Centered Floating Rounded Circle Capsule Island */
+/* Scrolled State: Small Centered Floating Rounded Circle Capsule Island (Center Locked) */
 .liquid-nav-pill.is-scrolled {
   width: max-content;
-  max-width: calc(100vw - 20px);
+  max-width: min(calc(100vw - 20px), 480px);
   margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 9999px;
   padding: 6px 14px;
   background-color: rgba(250, 249, 245, 0.96);
