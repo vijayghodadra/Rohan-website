@@ -35,7 +35,10 @@ export default function WishlistDrawer() {
 
       {/* Drawer Panel */}
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-3 sm:pl-10">
-        <div className="w-screen max-w-md bg-[#FAF9F5]/98 backdrop-blur-3xl border-l border-roshan-gold-champagne/40 shadow-2xl p-6 flex flex-col justify-between animate-in slide-in-from-right duration-300">
+        <div
+          className="w-screen max-w-md bg-[#FAF9F5] border-l border-roshan-gold-champagne/40 shadow-2xl p-6 flex flex-col justify-between animate-in slide-in-from-right duration-300"
+          style={{ backgroundColor: '#FAF9F5' }}
+        >
           
           {/* Header */}
           <div>

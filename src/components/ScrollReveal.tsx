@@ -69,9 +69,9 @@ export default function ScrollReveal({
 export function ScrollStagger({
   children,
   className = '',
-  staggerChildren = 0.1,
-  delayChildren = 0.05,
-  amount = 0.1,
+  staggerChildren = 0.04,
+  delayChildren = 0.01,
+  amount = 'some',
   once = true,
 }: {
   children: React.ReactNode;

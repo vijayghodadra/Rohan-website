@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { ProductProvider } from '@/context/ProductContext';
 import { CartProvider } from '@/context/CartContext';
 import LiquidGlassBackground from '@/components/LiquidGlassBackground';
 import Navbar from '@/components/Navbar';
@@ -47,24 +48,26 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col relative bg-[#FAF9F5] text-[#1B1512] font-sans">
-        <CartProvider>
-          {/* Ambient iPhone Liquid Glass Fluid Dynamics */}
-          <LiquidGlassBackground />
+        <ProductProvider>
+          <CartProvider>
+            {/* Ambient iPhone Liquid Glass Fluid Dynamics */}
+            <LiquidGlassBackground />
 
-          {/* Morphing Full-Width to Small Rounded Capsule Header Nav */}
-          <Navbar />
+            {/* Morphing Full-Width to Small Rounded Capsule Header Nav */}
+            <Navbar />
 
-          {/* Main Page Content */}
-          <main className="flex-1 z-10">{children}</main>
+            {/* Main Page Content */}
+            <main className="flex-1 z-10">{children}</main>
 
-          {/* Interactive Drawers & Modals */}
-          <CartDrawer />
-          <WishlistDrawer />
-          <ProductModal />
+            {/* Interactive Drawers & Modals */}
+            <CartDrawer />
+            <WishlistDrawer />
+            <ProductModal />
 
-          {/* Luxury Obsidian & Gold Footer */}
-          <Footer />
-        </CartProvider>
+            {/* Luxury Obsidian & Gold Footer */}
+            <Footer />
+          </CartProvider>
+        </ProductProvider>
       </body>
     </html>
   );

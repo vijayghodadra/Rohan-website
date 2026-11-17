@@ -145,21 +145,30 @@ button, a {
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Scrollbar aesthetic */
+/* Scrollbar aesthetic - sleek and unobtrusive */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAF9F5;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #DED0AE;
+  background: rgba(184, 144, 63, 0.4);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #B8903F;
+}
+
+/* Hide scrollbar utility for mobile drawers & modals */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

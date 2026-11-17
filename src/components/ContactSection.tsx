@@ -90,14 +90,31 @@ export default function ContactSection() {
               </h3>
 
               <div className="space-y-5 text-xs sm:text-sm">
+                {/* Head Office */}
+                <div className="flex items-start gap-3.5">
+                  <div className="p-2.5 rounded-xl bg-white/10 text-roshan-gold shrink-0 mt-0.5">
+                    <Building className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-white">Head Office</div>
+                    <div className="text-roshan-gold-sand/80 mt-0.5 leading-relaxed">
+                      {COMPANY_INFO.headOffice}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Manufacturing Plant */}
                 <div className="flex items-start gap-3.5">
                   <div className="p-2.5 rounded-xl bg-white/10 text-roshan-gold shrink-0 mt-0.5">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="font-bold text-white">Facility & Office Address</div>
+                    <div className="font-bold text-white">Manufacturing Plant</div>
                     <div className="text-roshan-gold-sand/80 mt-0.5 leading-relaxed">
-                      {COMPANY_INFO.address}
+                      {COMPANY_INFO.manufacturingAddress}
+                    </div>
+                    <div className="text-[11px] text-roshan-gold-champagne/80 mt-1">
+                      Current Plant: ~10,000 sq ft • Upcoming: ~25,000 sq ft
                     </div>
                   </div>
                 </div>
@@ -107,12 +124,12 @@ export default function ContactSection() {
                     <PhoneCall className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="font-bold text-white">Phone & Direct Lines</div>
+                    <div className="font-bold text-white">Phone & Direct Mobile</div>
                     <div className="text-roshan-gold-sand/80 mt-0.5">
-                      Office: {COMPANY_INFO.phone}
+                      Mobile / Phone: <a href="tel:+919662137795" className="hover:text-white transition-colors">{COMPANY_INFO.phone}</a>
                     </div>
                     <div className="text-roshan-gold-sand/80">
-                      WhatsApp: {COMPANY_INFO.whatsapp}
+                      WhatsApp: <a href={`https://wa.me/${COMPANY_INFO.whatsappRaw}`} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{COMPANY_INFO.whatsapp}</a>
                     </div>
                   </div>
                 </div>
@@ -214,7 +231,7 @@ export default function ContactSection() {
                       required
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      placeholder="+91 98765 43210"
+                      placeholder="+91 96621 37795"
                       className="w-full px-4 py-2.5 text-xs rounded-xl bg-[#FAF9F5] border border-roshan-gold-champagne/40 focus:outline-none focus:border-roshan-crimson text-roshan-obsidian"
                     />
                   </div>

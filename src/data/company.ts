@@ -7,22 +7,27 @@ export const COMPANY_INFO = {
   shortTagline: 'Everyday Homeware, Built for Indian Households',
   foundingYear: '2008',
   headquarters: 'Vadodara, Gujarat, India',
-  address: 'Plot No. 42-45, GIDC Industrial Estate, Makarpura, Vadodara, Gujarat 390010, India',
-  phone: '+91 (0265) 263-8890',
-  whatsapp: '+91 98765 43210',
-  whatsappRaw: '919876543210',
+  headOffice: '1st Floor, Plot No. 174, Brushellz Industrial Park, Opp GSFC, Dashrath, Vadodara - 391740, Gujarat',
+  manufacturingAddress: 'A-2/832 GIDC Estate, Makarpura, Vadodara, Gujarat',
+  address: 'Head Office: 1st Floor, Plot No. 174, Brushellz Industrial Park, Opp GSFC, Dashrath, Vadodara - 391740, Gujarat | Plant: A-2/832 GIDC Estate, Makarpura, Vadodara, Gujarat',
+  phone: '+91 96621 37795',
+  whatsapp: '+91 96621 37795',
+  whatsappRaw: '919662137795',
   email: 'contact@roshan.com',
   b2bEmail: 'sales@roshan.com',
   supportEmail: 'support@roshan.com',
   workingHours: 'Mon - Sat: 9:00 AM - 7:00 PM IST',
-  certifications: ['ISO 9001:2015 Certified', '100% Virgin Grade Polymer', 'BPA-Free Certified', 'Make In India Champion', 'Zero-Defect Quality Standard'],
+  certifications: ['ISO 9001:2015 Certified', '100% Virgin Grade Polymer', 'CSD Approved Quality', 'BPA-Free Certified', 'Make In India Champion'],
+  currentPlantArea: '~10,000 sq ft',
+  upcomingPlantArea: '~25,000 sq ft',
+  machineCount: '7 Injection Moulding Machines',
   stats: [
     { label: 'States & UTs Reached', value: '24+', suffix: 'Across India' },
-    { label: 'Monthly Polymer Capacity', value: '650+', suffix: 'Metric Tons' },
+    { label: 'Injection Moulding Cells', value: '7 Machines', suffix: 'Expanding in Upcoming Months' },
+    { label: 'Manufacturing Footprint', value: '~10,000 sq ft', suffix: 'Upcoming ~25,000 sq ft Plant' },
     { label: 'Retail & Distribution Partners', value: '12,000+', suffix: 'Active Outlets' },
-    { label: 'Precision Injection Moulds', value: '85+', suffix: 'In-House Tooling' },
-    { label: 'Products Delivered', value: '18M+', suffix: 'Households Served' },
-    { label: 'Clamping Force Range', value: '80T - 950T', suffix: 'Injection Machines' },
+    { label: 'Precision Tooling & Moulds', value: '85+', suffix: 'In-House Tooling' },
+    { label: 'Households Served', value: '18M+', suffix: 'Pan India Families' },
   ]
 };
 
@@ -51,18 +56,23 @@ export const VISION_MISSION = {
 
 export const MANUFACTURING_DETAILS = {
   title: 'Our Manufacturing Facility',
-  subtitle: 'High-Precision Injection Moulding Infrastructure in Vadodara, Gujarat',
-  description: 'Spanning over 85,000 square feet in the industrial heartland of Vadodara, Roshan operates cutting-edge automated injection moulding cells, centralized material drying, robotic part extraction, and advanced clean finishing floors.',
+  subtitle: 'Precision Injection Moulding Hub in Makarpura GIDC, Vadodara',
+  description: 'Operating from our primary ~10,000 sq ft plant in Makarpura GIDC, Vadodara, with a major ~25,000 sq ft facility expansion underway, Roshan runs 7 high-precision injection moulding machines with immediate scope for fleet expansion in the upcoming months.',
+  currentPlant: '~10,000 sq ft',
+  upcomingPlant: '~25,000 sq ft',
+  machineCount: '7 Units (Fleet Expansion in Progress)',
+  headOfficeAddress: '1st Floor, Plot No. 174, Brushellz Industrial Park, Opp GSFC, Dashrath, Vadodara - 391740, Gujarat',
+  plantAddress: 'A-2/832 GIDC Estate, Makarpura, Vadodara, Gujarat',
   facilitySpecs: [
     {
-      title: 'Advanced Machinery',
-      value: '28+ High-Precision Units',
-      desc: 'Microprocessor-controlled servo-hydraulic injection machines ranging from 80 to 950 tons clamping force, capable of single-shot parts up to 5.2 kg.'
+      title: 'Injection Moulding Cells',
+      value: '7 High-Precision Units',
+      desc: 'Presently operating 7 microprocessor-controlled injection moulding machines with planned fleet capacity additions in upcoming months.'
     },
     {
-      title: 'Tool Room & CAD/CAM',
-      value: 'In-House Precision Tooling',
-      desc: 'Equipped with CNC wire-cut EDM, 5-axis vertical machining centers, and mold flow simulation software for rapid development of complex multi-cavity molds.'
+      title: 'Plant Footprint Expansion',
+      value: '~10,000 to ~25,000 sq ft',
+      desc: 'Current ~10,000 sq ft active manufacturing floor in Makarpura GIDC, scaling rapidly with an upcoming ~25,000 sq ft state-of-the-art facility.'
     },
     {
       title: 'Material Science Lab',
@@ -70,9 +80,9 @@ export const MANUFACTURING_DETAILS = {
       desc: 'In-house Melt Flow Index (MFI) testers, Izod impact testers, environmental stress cracking baths, and spectrophotometer color-matching.'
     },
     {
-      title: 'Automation & Cleanliness',
-      value: 'Class 100,000 Assembly',
-      desc: 'Robotic side-entry and 3-axis cartesian pick-and-place robots, automated conveyorized packing, and dust-controlled assembly lines.'
+      title: 'Tool Room & CAD/CAM',
+      value: 'In-House Precision Tooling',
+      desc: 'Multi-cavity mold maintenance, precision CNC tooling, and mold flow simulation ensuring zero-defect wall thickness and high cycle rates.'
     }
   ],
   processes: [
@@ -92,23 +102,19 @@ export const CAPABILITIES = {
     categoriesCovered: [
       {
         name: 'Bathroom Ware',
-        summary: 'Heavy buckets (16L–25L), deep soaking tubs, non-slip bath stools, precision mugs, self-draining soap trays, and odor-lock swing bins.'
+        summary: 'Frosty and Dual Buckets (16L–25L), deep soaking tubs, anti-skid bath stools, Patla bath seats, deluxe & regular mugs, pedal bins, and soap cases.'
       },
       {
-        name: 'Kitchen & Dining Ware',
-        summary: 'Unbreakable dinner sets, stackable storage containers, insulated water jugs, spice organizers, and multi-tier prep strainers.'
-      },
-      {
-        name: 'Cleaning Essentials',
-        summary: 'Centrifugal spin mops, wide squeegee wipers, flagged dustpan-brush combos, and chemical-resistant industrial spray bottles.'
+        name: 'Household & Cleaning',
+        summary: 'Premium cleaning brooms, floor squeegee wipers, dustpans, heavy-duty swing dustbins, cloth clips, garment hangers, and laundry baskets.'
       },
       {
         name: 'Storage & Organization',
-        summary: 'Aesthetic open-weave baskets, modular wardrobe bins, self-watering indoor planters, and unbreakable coat hangers.'
+        summary: 'Decorative planters (Round, Square, Rectangle), utility ropes, clotheslines, and versatile storage containers.'
       },
       {
-        name: 'Thermal & Hydration Ware',
-        summary: 'Double-wall PUF insulated flasks, leak-tight fridge bottles, and stainless steel multi-tier lunch carriers.'
+        name: 'CSD & Defense Supplies',
+        summary: 'Specialized household products tested and listed for Indian Armed Forces Canteen Stores Department (CSD).'
       }
     ],
     qualityFeatures: ['100% Virgin Grade Polymers', 'Heavy Gauge Wall Thickness', 'Non-Fading Masterbatch Color', 'Dishwasher & Freezer Safe']
@@ -116,7 +122,7 @@ export const CAPABILITIES = {
   contractManufacturing: {
     title: 'Contract Manufacturing & OEM / ODM',
     badge: 'B2B Turnkey Solutions',
-    description: 'Roshan is the preferred manufacturing partner for leading FMCG brands, retail conglomerates, hospitality groups, and international importers looking for end-to-end custom plastic manufacturing in India.',
+    description: 'Roshan is the trusted manufacturing partner for FMCG brands, retail conglomerates, and institutional buyers looking for precision plastic injection moulding in Vadodara, Gujarat.',
     services: [
       {
         title: 'Custom Product Design & Prototyping',
@@ -124,11 +130,11 @@ export const CAPABILITIES = {
       },
       {
         title: 'Mould Design, Tooling & Fabrication',
-        desc: 'Hardened P20, H13, and stainless steel mold fabrication with hot runner systems, optimized cycle cooling, and guaranteed 1,000,000+ shot life.'
+        desc: 'Multi-cavity hardened tool fabrication with hot runner systems, optimized cycle cooling, and high-durability shot life.'
       },
       {
-        title: 'High-Volume Precision Production',
-        desc: 'Over 28 high-tonnage machines running 24/7 with automated robotic part extraction, ensuring prompt fulfillment of multi-container export orders.'
+        title: 'High-Precision Injection Production',
+        desc: 'Presently 7 injection moulding machines operating in Makarpura GIDC, expanding with an upcoming ~25,000 sq ft modern facility.'
       },
       {
         title: 'Private Label Branding & Packaging',
@@ -136,39 +142,39 @@ export const CAPABILITIES = {
       },
       {
         title: 'Regulatory & Export Compliance',
-        desc: 'Full documentation support for US FDA, EU food contact regulations, RoHS certification, and port-side container logistics from Nhava Sheva & Mundra.'
+        desc: 'Full documentation support for ISO standards, food contact regulations, and port-side container logistics from Mundra & Hazira ports.'
       }
     ],
     b2bHighlights: [
-      'Minimum Order Flexibility: From 5,000 units to multi-million part runs',
+      'Minimum Order Flexibility: From trial pilot batches to multi-thousand carton runs',
       'Confidentiality & IP Protection with formal NDAs',
-      'Dedicated engineering account managers',
-      'Strategic port proximity: 6 hours to Mundra & Hazira ports'
+      'Dedicated engineering and account management',
+      'Strategic Gujarat industrial corridor proximity'
     ]
   }
 };
 
 export const DIRECTORS: Director[] = [
   {
-    name: 'Shri Roshan Patel',
+    name: 'Sahil Navin Bhagtani',
+    title: 'Director of Operations & Strategic Expansion',
+    role: 'Plant Production, Technology & Capacity Scaling',
+    bio: 'Spearheading Roshan’s operational excellence and manufacturing scale, Sahil Navin Bhagtani oversees daily injection moulding plant performance, high-precision tooling cycles, and the active expansion from the ~10,000 sq ft facility to the upcoming ~25,000 sq ft manufacturing hub in Vadodara.',
+    highlights: ['Driving ~25,000 sq ft Plant Expansion', 'Optimizing 7 High-Precision Injection Lines', 'CSD & Institutional Supply Integration'],
+  },
+  {
+    name: 'Sangita Jadeja',
+    title: 'Director of Commercial Alliances & Corporate Governance',
+    role: 'Institutional Partnerships & Brand Management',
+    bio: 'Sangita Jadeja leads Roshan’s institutional client partnerships, nationwide wholesale distribution network, and statutory corporate governance. Her unwavering focus on ethical manufacturing and customer satisfaction has established Roshan as a dependable household name across India.',
+    highlights: ['Steering Pan-India Wholesale & Retail Distribution', 'Corporate Governance & Quality Assurance Champion', 'Key Institutional & Retail Account Lead'],
+  },
+  {
+    name: 'Navinkumar Thakurdas Bhagtani',
     title: 'Managing Director & Founder',
-    role: 'Executive Vision & Corporate Strategy',
-    bio: 'With over 24 years of hands-on leadership in India’s polymer and precision plastics sector, Shri Roshan Patel established Roshan with a vision to democratize luxury homeware. His strategic guidance drives the company’s capital investments, sustainable manufacturing transitions, and multi-state distribution alliances.',
-    highlights: ['24+ Years Industry Pioneer', 'Spearheaded 24-state retail expansion', 'Champion of Zero-Waste Polymer Circularity'],
-  },
-  {
-    name: 'Rajesh K. Varma',
-    title: 'Director of Technical Operations & Tooling',
-    role: 'Injection Moulding & Polymer Engineering',
-    bio: 'A mechanical engineering veteran with expertise in precision mold design and robotics automation. Shri Rajesh Varma oversees the 85,000 sq.ft. Vadodara manufacturing plant, supervising tool room precision, cycle time optimizations, and stringent ISO quality assurance protocols across 28 injection moulding lines.',
-    highlights: ['Specialist in Multi-Cavity Hot Runner Molds', 'Implemented Robotic Pick-and-Place Cells', 'Six Sigma Quality Champion'],
-  },
-  {
-    name: 'Ananya R. Mehta',
-    title: 'Director of Commercial Alliances & Brand Growth',
-    role: 'B2B Partnerships & Nationwide Supply Chain',
-    bio: 'Holding an MBA in International Supply Chain Management, Ms. Mehta spearheads Roshan’s national retail network, large-format hypermarket vendor contracts, and international contract manufacturing accounts. She is responsible for digital commerce transformation and customer experience excellence.',
-    highlights: ['Built 12,000+ Retail Partner Network', 'Expanded B2B OEM Portfolio by 300%', 'Pioneered Direct-to-Consumer Digital Store'],
+    role: 'Founding Vision, Polymer Engineering & Tooling Mastery',
+    bio: 'With extensive expertise in plastics engineering and precision injection moulding, Navinkumar Thakurdas Bhagtani founded Roshan with a clear mandate: deliver uncompromised durability and virgin polymer quality to Indian households. He guides strategic capital investments, mold design standards, and corporate vision.',
+    highlights: ['Pioneer in Polymer Injection Moulding & Tooling', 'Architect of 100% Virgin Polymer Standards', 'Visionary Behind Roshan Industrial Growth'],
   }
 ];
 

@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { PRODUCTS } from '@/data/products';
+import { useProductStore } from '@/context/ProductContext';
 import { Product } from '@/types';
 import { useCart } from '@/context/CartContext';
 import {
@@ -21,9 +21,10 @@ import {
   Home,
   Sparkle,
 } from 'lucide-react';
-import ScrollReveal, { ScrollStagger, ScrollStaggerItem } from '@/components/ScrollReveal';
+import ScrollReveal from '@/components/ScrollReveal';
 
 function ProductsContent() {
+  const { products } = useProductStore();
   const { addToCart, setQuickViewProduct, toggleWishlist, isInWishlist } = useCart();
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
@@ -43,11 +44,12 @@ function ProductsContent() {
   };
 
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       // Category filter
       if (selectedCategory !== 'all') {
         if (selectedCategory === 'bathroom' && product.categorySlug !== 'bathroom') return false;
         if (selectedCategory === 'household' && product.categorySlug !== 'household') return false;
+        if (selectedCategory === 'cleaning' && product.categorySlug !== 'cleaning') return false;
       }
       // Search query filter
       if (searchQuery.trim()) {
@@ -98,7 +100,7 @@ function ProductsContent() {
                   : 'bg-white/80 backdrop-blur-md text-roshan-obsidian hover:bg-white border border-roshan-gold-champagne/40'
               }`}
             >
-              All Products ({PRODUCTS.length})
+              All Products ({products.length})
             </button>
             <button
               onClick={() => setSelectedCategory('bathroom')}
@@ -109,7 +111,7 @@ function ProductsContent() {
               }`}
             >
               <Bath className="w-4 h-4" />
-              <span>Bathroom Products ({PRODUCTS.filter((p) => p.categorySlug === 'bathroom').length})</span>
+              <span>Bathroom Products ({products.filter((p) => p.categorySlug === 'bathroom').length})</span>
             </button>
             <button
               onClick={() => setSelectedCategory('household')}
@@ -120,7 +122,18 @@ function ProductsContent() {
               }`}
             >
               <Home className="w-4 h-4" />
-              <span>Household & Kitchen ({PRODUCTS.filter((p) => p.categorySlug === 'household').length})</span>
+              <span>Household ({products.filter((p) => p.categorySlug === 'household').length})</span>
+            </button>
+            <button
+              onClick={() => setSelectedCategory('cleaning')}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                selectedCategory === 'cleaning'
+                  ? 'bg-roshan-crimson text-white shadow-liquid-crimson scale-105'
+                  : 'bg-white/80 backdrop-blur-md text-roshan-obsidian hover:bg-white border border-roshan-gold-champagne/40'
+              }`}
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>Cleaning ({products.filter((p) => p.categorySlug === 'cleaning').length})</span>
             </button>
           </div>
 
@@ -178,7 +191,7 @@ function ProductsContent() {
             </button>
           </div>
         ) : (
-          <ScrollStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 max-w-sm sm:max-w-none mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 max-w-sm sm:max-w-none mx-auto">
             {filteredProducts.map((product) => {
               const selectedColor = selectedColorMap[product.id] || product.colors[0];
               const discountPercent = Math.round(
@@ -186,10 +199,10 @@ function ProductsContent() {
               );
 
               return (
-                <ScrollStaggerItem key={product.id}>
-                  <div
-                    className="group relative rounded-[2rem] sm:rounded-3xl bg-white/80 backdrop-blur-xl border border-roshan-gold-champagne/40 hover:border-roshan-crimson/50 shadow-glass-sm hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col justify-between h-full"
-                  >
+                <div
+                  key={product.id}
+                  className="group relative rounded-[2rem] sm:rounded-3xl bg-white/90 backdrop-blur-xl border border-roshan-gold-champagne/40 hover:border-roshan-crimson/50 shadow-glass-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col justify-between h-full"
+                >
                   {/* Liquid Glass Hover Sheen */}
                   <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-transparent via-white/20 to-transparent" />
 
@@ -213,6 +226,8 @@ function ProductsContent() {
                                 ? 'bg-roshan-crimson'
                                 : product.badge === 'New'
                                 ? 'bg-roshan-gold-deep'
+                                : product.badge === 'CSD Listed'
+                                ? 'bg-[#1E3A8A]'
                                 : product.badge === 'Eco Choice'
                                 ? 'bg-roshan-green'
                                 : 'bg-roshan-obsidian'
@@ -284,6 +299,20 @@ function ProductsContent() {
                         {product.description}
                       </p>
 
+                      {/* Specs / CSD Tags */}
+                      <div className="flex flex-wrap items-center gap-1.5 mt-2">
+                        {product.capacity && (
+                          <span className="text-[10px] font-medium text-roshan-obsidian/80 bg-[#FAF9F5] px-2 py-0.5 rounded-md border border-roshan-gold-champagne/40">
+                            {product.capacity}
+                          </span>
+                        )}
+                        {product.csdStatus && (
+                          <span className="text-[9px] font-bold text-[#1E3A8A] bg-[#1E3A8A]/10 px-2 py-0.5 rounded-md border border-[#1E3A8A]/25">
+                            ★ {product.csdStatus}
+                          </span>
+                        )}
+                      </div>
+
                       {/* Color swatches */}
                       {product.colors && product.colors.length > 0 && (
                         <div className="flex items-center gap-1.5 mt-3">
@@ -335,10 +364,9 @@ function ProductsContent() {
                     </div>
                   </div>
                 </div>
-              </ScrollStaggerItem>
-            );
-          })}
-        </ScrollStagger>
+              );
+            })}
+          </div>
         )}
       </div>
     </section>

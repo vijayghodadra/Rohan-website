@@ -65,8 +65,8 @@ export default function HeroSection() {
 
           {/* Descriptive Tagline */}
           <p className="text-xs sm:text-base lg:text-lg text-gray-200 leading-relaxed font-sans max-w-2xl font-normal drop-shadow-sm mx-auto lg:mx-0">
-            From unbreakable bathroom suites and durable kitchen prep essentials to precision OEM contract manufacturing — crafted with{' '}
-            <strong className="text-white font-semibold">100% virgin-grade polymer</strong> at our 85,000 sq.ft facility in Vadodara, Gujarat.
+            From unbreakable bathroom suites and durable household essentials to precision OEM contract manufacturing — crafted with{' '}
+            <strong className="text-white font-semibold">100% virgin-grade polymer</strong> across 7 injection moulding machines in Vadodara, Gujarat (~10,000 sq.ft plant expanding to ~25,000 sq.ft).
           </p>
 
           {/* Action CTAs with Liquid Shimmer & Glass Styling */}

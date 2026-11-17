@@ -200,7 +200,8 @@ export default function AboutUsSection() {
                     <div className="absolute inset-0 bg-gradient-to-t from-roshan-obsidian/80 via-transparent to-transparent" />
                     <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-black/60 backdrop-blur-xl border border-white/20">
                       <div className="text-xs font-bold text-roshan-gold">Automated Injection Cells</div>
-                      <div className="text-[11px] text-gray-200">28+ servo-hydraulic injection machines running 24/7 with robotic extraction</div>
+                      <div className="text-[11px] text-gray-200">7 high-precision injection moulding machines with fleet expansion underway</div>
+                      <div className="text-[10px] text-roshan-gold-sand/80 mt-1">Plant: A-2/832 GIDC Estate, Makarpura, Vadodara (~10,000 sq ft expanding to ~25,000 sq ft)</div>
                     </div>
                   </div>
 

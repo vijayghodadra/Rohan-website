@@ -148,6 +148,18 @@ export default function ProductModal() {
                     <span className="font-semibold text-roshan-obsidian">{product.dimensions}</span>
                   </div>
                 )}
+                {product.csdStatus && (
+                  <div className="flex justify-between text-[#1E3A8A] font-semibold">
+                    <span>CSD Canteen Status:</span>
+                    <span>{product.csdStatus}</span>
+                  </div>
+                )}
+                {product.notes && (
+                  <div className="flex justify-between text-roshan-crimson font-medium text-[11px]">
+                    <span>Catalog Note:</span>
+                    <span>{product.notes}</span>
+                  </div>
+                )}
                 {product.minOrderB2B && (
                   <div className="flex justify-between text-roshan-gold-deep font-semibold">
                     <span>Wholesale MOQ:</span>

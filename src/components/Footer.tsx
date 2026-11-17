@@ -102,19 +102,31 @@ export default function Footer() {
               <li>
                 <Link href="/products?category=bathroom" className="hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-roshan-gold/60 group-hover:text-roshan-gold transition-colors" />
-                  <span>Bathroom Products (7)</span>
+                  <span>Bathroom Products</span>
                 </Link>
               </li>
               <li>
                 <Link href="/products?category=household" className="hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-roshan-gold/60 group-hover:text-roshan-gold transition-colors" />
-                  <span>Household & Kitchen (11)</span>
+                  <span>Household Essentials</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/products?category=cleaning" className="hover:text-white transition-colors flex items-center gap-1.5 group">
+                  <ChevronRight className="w-3 h-3 text-roshan-gold/60 group-hover:text-roshan-gold transition-colors" />
+                  <span>Cleaning Ranges</span>
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-white transition-colors flex items-center gap-1.5 group text-roshan-gold-champagne font-semibold">
                   <ChevronRight className="w-3 h-3 text-roshan-gold" />
                   <span>Contact & B2B Inquiry</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/admin" className="hover:text-white transition-colors flex items-center gap-1.5 group text-roshan-gold font-semibold">
+                  <ChevronRight className="w-3 h-3 text-roshan-gold" />
+                  <span>Admin Panel (Manage Products)</span>
                 </Link>
               </li>
             </ul>
@@ -142,7 +154,7 @@ export default function Footer() {
               <li>
                 <Link href="/#manufacturing" className="hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-roshan-gold/60 group-hover:text-roshan-gold transition-colors" />
-                  <span>85,000 sq.ft Vadodara Plant</span>
+                  <span>Makarpura Plant & Expansion</span>
                 </Link>
               </li>
               <li>
@@ -160,7 +172,7 @@ export default function Footer() {
               <li>
                 <Link href="/#capabilities" className="hover:text-white transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-roshan-gold/60 group-hover:text-roshan-gold transition-colors" />
-                  <span>OEM Contract Tooling (80T - 950T)</span>
+                  <span>7 Injection Machines & Moulding</span>
                 </Link>
               </li>
             </ul>
@@ -173,15 +185,27 @@ export default function Footer() {
               Vadodara Office & Plant
             </div>
 
-            <div className="flex items-start gap-2.5 text-xs text-roshan-gold-sand/85">
-              <MapPin className="w-4 h-4 text-roshan-gold shrink-0 mt-0.5" />
-              <span>Plot No. 42-45, GIDC Industrial Estate, Makarpura, Vadodara, Gujarat 390010</span>
+            <div className="space-y-2 text-xs text-roshan-gold-sand/85">
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-roshan-gold shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-white block">Head Office:</span>
+                  <span>{COMPANY_INFO.headOffice}</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <Factory className="w-4 h-4 text-roshan-crimson-light shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-white block">Plant:</span>
+                  <span>{COMPANY_INFO.manufacturingAddress}</span>
+                </div>
+              </div>
             </div>
 
             <div className="flex items-center gap-2.5 text-xs text-roshan-gold-sand/85">
               <PhoneCall className="w-4 h-4 text-roshan-gold shrink-0" />
-              <a href="tel:+912652638890" className="hover:text-white transition-colors">
-                +91 (0265) 263-8890
+              <a href="tel:+919662137795" className="hover:text-white transition-colors font-semibold">
+                {COMPANY_INFO.phone}
               </a>
             </div>
 

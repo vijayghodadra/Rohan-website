@@ -6,9 +6,10 @@ export interface Product {
   price: number;
   originalPrice: number;
   image: string;
+  gallery?: string[];
   description: string;
   longDescription?: string;
-  badge?: 'Bestseller' | 'New' | 'Popular' | 'Eco Choice';
+  badge?: 'Bestseller' | 'New' | 'Popular' | 'Eco Choice' | 'CSD Listed' | 'Featured';
   rating: number;
   reviewsCount: number;
   colors: string[];
@@ -18,6 +19,8 @@ export interface Product {
   features: string[];
   inStock: boolean;
   minOrderB2B?: number;
+  notes?: string;
+  csdStatus?: string;
 }
 
 export interface CartItem {

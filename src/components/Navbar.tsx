@@ -26,6 +26,7 @@ import {
   Building2,
   Layers,
   PhoneCall,
+  SlidersHorizontal,
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -110,16 +111,18 @@ export default function Navbar() {
           >
             {/* Authentic Brand Logo Badge */}
             <div
-              className={`relative overflow-hidden rounded-xl shadow-xs border border-roshan-gold/40 group-hover:border-roshan-crimson group-hover:scale-105 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] bg-[#BD0100] flex items-center justify-center shrink-0 ${
-                scrolled ? 'h-7 sm:h-8 px-1.5' : 'h-8.5 sm:h-10 px-2'
+              className={`relative overflow-hidden rounded-xl shadow-xs border border-roshan-gold/40 group-hover:border-roshan-crimson group-hover:scale-105 transition-all duration-300 bg-[#BD0100] flex items-center justify-center shrink-0 ${
+                scrolled
+                  ? 'w-[72px] h-[28px] sm:w-[84px] sm:h-[32px] px-1.5'
+                  : 'w-[80px] h-[32px] sm:w-[94px] sm:h-[36px] px-2'
               }`}
             >
               <Image
                 src="/images/roshan-logo.png"
                 alt="Roshan Logo"
-                width={95}
-                height={40}
-                className="h-full w-auto object-contain"
+                width={78}
+                height={30}
+                className="w-full h-full object-contain"
                 priority
               />
             </div>
@@ -217,7 +220,7 @@ export default function Navbar() {
                             <ChevronRight className="w-3.5 h-3.5 text-roshan-taupe/60 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                           </div>
                           <div className="text-[11px] text-roshan-taupe leading-snug mt-0.5">
-                            85,000 sq.ft plant in Vadodara, Gujarat
+                            Makarpura plant (~10k sq.ft expanding to ~25k sq.ft)
                           </div>
                         </div>
                       </Link>
@@ -469,6 +472,19 @@ export default function Navbar() {
               <PhoneCall className="w-3.5 h-3.5 shrink-0 text-roshan-gold" />
               <span>Contact Us</span>
             </Link>
+
+            {/* 5. Admin Panel */}
+            <Link
+              href="/admin"
+              className={`flex items-center gap-1.5 rounded-full font-semibold text-roshan-obsidian hover:text-roshan-crimson hover:bg-black/5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] whitespace-nowrap ${
+                scrolled ? 'px-2 py-1 text-xs' : 'px-3 py-1 text-xs'
+              }`}
+              onClick={closeDropdownImmediately}
+              title="Admin Panel - Manage Products"
+            >
+              <SlidersHorizontal className="w-3.5 h-3.5 shrink-0 text-roshan-gold" />
+              <span>Admin</span>
+            </Link>
           </div>
 
           {/* Right: Wishlist & Cart Actions */}
@@ -524,40 +540,44 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="fixed inset-0 bg-roshan-obsidian/50 backdrop-blur-sm transition-opacity"
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
             onClick={() => setMobileMenuOpen(false)}
           />
 
-          <div className="fixed top-16 left-1/2 -translate-x-1/2 w-[calc(100%-24px)] max-w-md max-h-[85vh] overflow-y-auto p-5 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] bg-[#FAF9F5]/98 backdrop-blur-2xl border border-roshan-gold-champagne/50 shadow-2xl animate-in zoom-in-95 duration-150">
+          <div
+            className="fixed top-14 left-1/2 -translate-x-1/2 w-[calc(100%-20px)] max-w-md max-h-[88vh] overflow-y-auto p-5 sm:p-6 rounded-[2rem] sm:rounded-[2.5rem] bg-[#FAF9F5] border border-roshan-gold/40 shadow-2xl animate-in zoom-in-95 duration-150 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            style={{ backgroundColor: '#FAF9F5' }}
+          >
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between pb-3 border-b border-roshan-taupe-border">
                 <div className="flex items-center gap-2.5">
-                  <div className="h-8 rounded-lg overflow-hidden border border-roshan-gold/40 bg-[#BD0100] px-1.5 flex items-center justify-center shadow-xs">
+                  <div className="w-[76px] h-[30px] rounded-lg overflow-hidden border border-roshan-gold/40 bg-[#BD0100] px-1.5 flex items-center justify-center shadow-xs shrink-0">
                     <Image
                       src="/images/roshan-logo.png"
                       alt="Roshan Logo"
-                      width={65}
-                      height={32}
-                      className="h-full w-auto object-contain"
+                      width={68}
+                      height={26}
+                      className="w-full h-full object-contain"
                     />
                   </div>
                 </div>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-1.5 rounded-full hover:bg-black/5 text-roshan-taupe"
+                  className="p-1.5 rounded-full hover:bg-black/5 text-roshan-obsidian transition-colors"
+                  aria-label="Close menu"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Quick Actions (Wishlist & Cart) */}
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2.5">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     setIsWishlistOpen(true);
                   }}
-                  className="flex items-center justify-center gap-2 p-2.5 rounded-2xl bg-white border border-roshan-gold-champagne/40 text-xs font-semibold text-roshan-obsidian shadow-2xs hover:bg-roshan-crimson hover:text-white transition-all group"
+                  className="flex items-center justify-center gap-2 p-2.5 rounded-2xl bg-white border border-roshan-gold-champagne/50 text-xs font-bold text-roshan-obsidian shadow-2xs hover:bg-roshan-crimson hover:text-white transition-all group"
                 >
                   <Heart className="w-4 h-4 text-roshan-crimson group-hover:text-white transition-colors" />
                   <span>Wishlist ({totalWishlistItems})</span>
@@ -567,7 +587,7 @@ export default function Navbar() {
                     setMobileMenuOpen(false);
                     setIsCartOpen(true);
                   }}
-                  className="flex items-center justify-center gap-2 p-2.5 rounded-2xl bg-white border border-roshan-gold-champagne/40 text-xs font-semibold text-roshan-obsidian shadow-2xs hover:bg-roshan-crimson hover:text-white transition-all group"
+                  className="flex items-center justify-center gap-2 p-2.5 rounded-2xl bg-white border border-roshan-gold-champagne/50 text-xs font-bold text-roshan-obsidian shadow-2xs hover:bg-roshan-crimson hover:text-white transition-all group"
                 >
                   <ShoppingBag className="w-4 h-4 text-roshan-crimson group-hover:text-white transition-colors" />
                   <span>Bag ({totalItems})</span>
@@ -579,7 +599,7 @@ export default function Navbar() {
                 <Link
                   href="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-roshan-obsidian hover:text-roshan-crimson py-1"
+                  className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-roshan-obsidian hover:text-roshan-crimson py-1 transition-colors"
                 >
                   <Home className="w-4 h-4 text-roshan-gold" />
                   <span>Home</span>
@@ -591,32 +611,32 @@ export default function Navbar() {
                 <span className="text-xs font-bold uppercase tracking-wider text-roshan-crimson">
                   1. About Us
                 </span>
-                <div className="mt-2 pl-3 flex flex-col gap-2 border-l-2 border-roshan-gold-champagne/40">
+                <div className="mt-2 pl-3 flex flex-col gap-2.5 border-l-2 border-roshan-gold/40">
                   <Link
-                    href="#vision-mission"
+                    href="/#vision-mission"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs text-roshan-obsidian hover:text-roshan-crimson"
+                    className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
                   >
                     Vision & Mission
                   </Link>
                   <Link
-                    href="#manufacturing"
+                    href="/#manufacturing"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs text-roshan-obsidian hover:text-roshan-crimson"
+                    className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
                   >
                     Manufacturing Facility (Vadodara)
                   </Link>
                   <Link
-                    href="#customers"
+                    href="/#customers"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs text-roshan-obsidian hover:text-roshan-crimson"
+                    className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
                   >
                     Customers & Reach (24+ States)
                   </Link>
                   <Link
-                    href="#director"
+                    href="/#director"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs text-roshan-obsidian hover:text-roshan-crimson"
+                    className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
                   >
                     Directors & Leadership
                   </Link>
@@ -628,18 +648,18 @@ export default function Navbar() {
                 <span className="text-xs font-bold uppercase tracking-wider text-roshan-crimson">
                   2. Capabilities
                 </span>
-                <div className="mt-2 pl-3 flex flex-col gap-2 border-l-2 border-roshan-gold-champagne/40">
+                <div className="mt-2 pl-3 flex flex-col gap-2.5 border-l-2 border-roshan-gold/40">
                   <Link
-                    href="#household-plastics"
+                    href="/#household-plastics"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs text-roshan-obsidian hover:text-roshan-crimson"
+                    className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
                   >
                     Household Plastic Products
                   </Link>
                   <Link
-                    href="#contract-manufacturing"
+                    href="/#contract-manufacturing"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs text-roshan-obsidian hover:text-roshan-crimson"
+                    className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
                   >
                     Contract Manufacturing (OEM/ODM)
                   </Link>
@@ -651,25 +671,25 @@ export default function Navbar() {
                 <span className="text-xs font-bold uppercase tracking-wider text-roshan-crimson">
                   3. Product Categories
                 </span>
-                <div className="mt-2 pl-3 flex flex-col gap-2 border-l-2 border-roshan-gold-champagne/40">
+                <div className="mt-2 pl-3 flex flex-col gap-2.5 border-l-2 border-roshan-gold/40">
                   <Link
                     href="/products?category=bathroom"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs text-roshan-obsidian hover:text-roshan-crimson"
+                    className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
                   >
                     Bathroom Products (7)
                   </Link>
                   <Link
                     href="/products?category=household"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs text-roshan-obsidian hover:text-roshan-crimson"
+                    className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
                   >
                     Household & Kitchen (11)
                   </Link>
                   <Link
                     href="/products"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-xs font-semibold text-roshan-crimson hover:underline"
+                    className="text-xs font-bold text-roshan-crimson hover:underline"
                   >
                     View All 18+ Products →
                   </Link>
@@ -680,9 +700,22 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-xs font-bold text-roshan-obsidian hover:text-roshan-crimson pt-2 border-t border-roshan-taupe-border flex items-center justify-between"
+                className="text-xs font-bold text-roshan-obsidian hover:text-roshan-crimson pt-2.5 border-t border-roshan-taupe-border flex items-center justify-between transition-colors"
               >
                 <span>4. Contact Us</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+
+              {/* 5. Admin Panel */}
+              <Link
+                href="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xs font-bold text-roshan-gold-deep hover:text-roshan-crimson pt-2.5 border-t border-roshan-taupe-border flex items-center justify-between transition-colors"
+              >
+                <div className="flex items-center gap-1.5">
+                  <SlidersHorizontal className="w-3.5 h-3.5 text-roshan-gold" />
+                  <span>Admin Panel (Manage Products)</span>
+                </div>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
@@ -690,7 +723,7 @@ export default function Navbar() {
               <Link
                 href="/products"
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 w-full py-3 rounded-full text-center font-bold text-xs text-white bg-roshan-obsidian hover:bg-roshan-crimson transition-all shadow-md flex items-center justify-center gap-2"
+                className="mt-2 w-full py-3 rounded-full text-center font-bold text-xs text-white bg-gradient-to-r from-roshan-crimson via-roshan-crimson-light to-roshan-crimson hover:brightness-110 active:scale-98 transition-all shadow-md flex items-center justify-center gap-2"
               >
                 <ShoppingBag className="w-4 h-4" />
                 <span>Browse Products Catalog</span>
@@ -704,7 +737,7 @@ export default function Navbar() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[11px] font-semibold text-green-700 flex items-center justify-center gap-1.5"
+                  className="text-[11px] font-semibold text-emerald-700 flex items-center justify-center gap-1.5 hover:underline"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
                   <span>Direct WhatsApp: {COMPANY_INFO.whatsapp}</span>

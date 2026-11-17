@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PRODUCTS } from '@/data/products';
+import { useProductStore } from '@/context/ProductContext';
 import { useCart } from '@/context/CartContext';
 import {
   ShoppingBag,
@@ -18,15 +18,16 @@ import {
 import ScrollReveal, { ScrollStagger, ScrollStaggerItem } from '@/components/ScrollReveal';
 
 export default function FeaturedProductsPreview() {
+  const { products } = useProductStore();
   const { addToCart, setQuickViewProduct, toggleWishlist, isInWishlist } = useCart();
 
   // Curate 4 signature flagship items for home page spotlight
-  const featured = PRODUCTS.slice(0, 4);
+  const featured = products.slice(0, 4);
 
   return (
     <section id="featured-products" className="py-20 lg:py-28 relative overflow-hidden bg-white/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header with Lazy Reveal */}
         <ScrollReveal duration={0.9} distance={36} amount={0.12}>
           <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 mb-10 sm:mb-12 text-center md:text-left">
@@ -40,7 +41,7 @@ export default function FeaturedProductsPreview() {
                 <span className="italic text-roshan-crimson font-normal">unbreakable luxury.</span>
               </h2>
               <p className="text-xs sm:text-base text-roshan-taupe mt-3 leading-relaxed max-w-xl">
-                Engineered with 100% virgin-grade polymer at our Vadodara manufacturing plant. Explore our signature pieces or browse the complete 18+ product store.
+                Engineered with 100% virgin-grade polymer at our Vadodara manufacturing plant. Explore our signature pieces or browse the complete product catalog.
               </p>
             </div>
 
@@ -50,7 +51,7 @@ export default function FeaturedProductsPreview() {
                 href="/products"
                 className="w-full sm:w-auto px-6 py-3.5 rounded-full font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-roshan-crimson via-roshan-crimson-light to-roshan-crimson shadow-liquid-crimson hover:shadow-lg transition-all flex items-center justify-center gap-2 group"
               >
-                <span>Explore All Products ({PRODUCTS.length})</span>
+                <span>Explore All Products ({products.length})</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -80,7 +81,16 @@ export default function FeaturedProductsPreview() {
                     {/* Top Badges */}
                     <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
                       {product.badge && (
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white bg-roshan-crimson shadow-md">
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-md ${product.badge === 'CSD Listed'
+                              ? 'bg-[#1E3A8A]'
+                              : product.badge === 'New'
+                                ? 'bg-roshan-gold-deep'
+                                : product.badge === 'Eco Choice'
+                                  ? 'bg-roshan-green'
+                                  : 'bg-roshan-crimson'
+                            }`}
+                        >
                           {product.badge}
                         </span>
                       )}
@@ -95,11 +105,10 @@ export default function FeaturedProductsPreview() {
                         e.stopPropagation();
                         toggleWishlist(product);
                       }}
-                      className={`absolute top-2.5 right-2.5 p-2 rounded-full backdrop-blur-md shadow-md transition-all active:scale-90 ${
-                        isInWishlist(product.id)
+                      className={`absolute top-2.5 right-2.5 p-2 rounded-full backdrop-blur-md shadow-md transition-all active:scale-90 ${isInWishlist(product.id)
                           ? 'bg-roshan-crimson text-white shadow-lg'
                           : 'bg-white/90 text-roshan-obsidian hover:text-roshan-crimson hover:bg-white'
-                      }`}
+                        }`}
                       title={isInWishlist(product.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
                       aria-label="Wishlist"
                     >
