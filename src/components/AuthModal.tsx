@@ -101,9 +101,6 @@ export default function AuthModal() {
         className="relative w-full max-w-md rounded-3xl sm:rounded-[2.5rem] bg-white text-stone-900 border-2 border-[#E3C687]/70 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden z-10 my-auto max-h-[92vh] flex flex-col"
         style={{ backgroundColor: '#FFFFFF' }}
       >
-        {/* Top Luxury Gold Accent Bar */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-[#BD0100] via-[#E3C687] to-[#BD0100]" />
-
         {/* Close Button */}
         <button
           onClick={() => setIsAuthOpen(false)}

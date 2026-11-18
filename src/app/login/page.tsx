@@ -93,9 +93,6 @@ export default function LoginPage() {
           className="rounded-3xl sm:rounded-[2.25rem] border-2 border-[#E3C687]/70 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.18)] overflow-hidden"
           style={{ backgroundColor: '#FFFFFF' }}
         >
-          {/* Top Luxury Gold Accent Bar */}
-          <div className="h-1.5 w-full bg-gradient-to-r from-[#BD0100] via-[#E3C687] to-[#BD0100]" />
-
           <div className="p-6 sm:p-8">
             {/* Brand Logo & Header */}
             <div className="flex flex-col items-center text-center mb-6">
