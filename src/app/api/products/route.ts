@@ -3,10 +3,12 @@ import fs from 'fs';
 import path from 'path';
 import { Product } from '@/types';
 import { PRODUCTS as DEFAULT_PRODUCTS } from '@/data/products';
+import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { isSupabaseConfigured } from '@/lib/supabase/client';
 
 const dataFilePath = path.join(process.cwd(), 'src', 'data', 'products.json');
 
-function readProducts(): Product[] {
+function readLocalProducts(): Product[] {
   try {
     if (fs.existsSync(dataFilePath)) {
       const data = fs.readFileSync(dataFilePath, 'utf8');
@@ -18,7 +20,7 @@ function readProducts(): Product[] {
   return DEFAULT_PRODUCTS;
 }
 
-function writeProducts(products: Product[]): boolean {
+function writeLocalProducts(products: Product[]): boolean {
   try {
     fs.writeFileSync(dataFilePath, JSON.stringify(products, null, 2), 'utf8');
     return true;
@@ -28,17 +30,64 @@ function writeProducts(products: Product[]): boolean {
   }
 }
 
-// GET all products
+// GET all products (Supabase with automatic local fallback)
 export async function GET() {
-  const products = readProducts();
+  if (isSupabaseConfigured()) {
+    try {
+      const supabase = createServerSupabaseClient();
+      if (supabase) {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!error && data && data.length > 0) {
+          const mapped: Product[] = data.map((row: any) => ({
+            id: row.id,
+            name: row.name,
+            category: row.category,
+            categorySlug: row.category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+            price: Number(row.discount_price),
+            originalPrice: row.original_price ? Number(row.original_price) : undefined,
+            image: Array.isArray(row.images) && row.images.length > 0 ? row.images[0] : '/catalog/basin-01.png',
+            gallery: Array.isArray(row.images) ? row.images.slice(1) : [],
+            description: row.description || '',
+            longDescription: row.specs || '',
+            rating: Number(row.rating) || 4.8,
+            reviewsCount: row.reviews_count || 50,
+            colors: ['#EC4899', '#F9FAFB', '#2563EB', '#10B981', '#F59E0B'],
+            capacity: 'Standard Capacity',
+            material: row.material || '100% Virgin Grade Polymer',
+            dimensions: row.dimensions || 'Standard',
+            features: Array.isArray(row.features) ? row.features : [],
+            inStock: Boolean(row.in_stock),
+            minOrderB2B: 60,
+          }));
+
+          return NextResponse.json({
+            success: true,
+            source: 'supabase',
+            count: mapped.length,
+            products: mapped,
+          });
+        }
+      }
+    } catch (err) {
+      console.warn('Supabase query failed, falling back to local file:', err);
+    }
+  }
+
+  // Fallback to local json file
+  const products = readLocalProducts();
   return NextResponse.json({
     success: true,
+    source: 'local',
     count: products.length,
     products,
   });
 }
 
-// POST create new product
+// POST create new product (Writes to both Supabase and local file)
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -49,10 +98,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const products = readProducts();
+    const products = readLocalProducts();
     const id = body.id || `roshan-custom-${Date.now()}`;
 
-    // Check if ID already exists
     if (products.some((p) => p.id === id)) {
       return NextResponse.json(
         { success: false, error: 'A product with this ID already exists' },
@@ -62,151 +110,65 @@ export async function POST(req: NextRequest) {
 
     const newProduct: Product = {
       id,
-      name: body.name.trim(),
+      name: body.name,
       category: body.category,
-      categorySlug: body.categorySlug || (body.category === 'Bathroom Products' ? 'bathroom' : body.category === 'Cleaning Products' ? 'cleaning' : 'household'),
-      price: Number(body.price) || 199,
-      originalPrice: Number(body.originalPrice) || Number(body.price) || 299,
+      categorySlug: body.categorySlug || body.category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      price: Number(body.price) || 0,
+      originalPrice: body.originalPrice ? Number(body.originalPrice) : undefined,
       image: body.image || '/catalog/basin-01.png',
       gallery: body.gallery || [],
       description: body.description || '',
-      longDescription: body.longDescription || body.description || '',
-      badge: body.badge || undefined,
+      longDescription: body.longDescription || '',
       rating: Number(body.rating) || 4.8,
-      reviewsCount: Number(body.reviewsCount) || 100,
-      colors: Array.isArray(body.colors) && body.colors.length > 0 ? body.colors : ['#EC4899', '#F9FAFB', '#2563EB', '#10B981', '#F59E0B'],
-      capacity: body.capacity || '',
-      material: body.material || '100% Virgin Grade Polymer (BPA Free)',
-      dimensions: body.dimensions || '',
-      features: Array.isArray(body.features) ? body.features : ['100% Virgin Grade Polymer', 'High durability'],
+      reviewsCount: Number(body.reviewsCount) || 1,
+      colors: body.colors || ['#2563EB', '#10B981', '#F59E0B'],
+      capacity: body.capacity || 'Standard',
+      material: body.material || '100% Virgin Grade Polymer',
+      dimensions: body.dimensions || 'Standard',
+      features: body.features || ['100% Virgin Grade Polymer', 'High stress-crack resistance'],
       inStock: body.inStock !== false,
-      minOrderB2B: Number(body.minOrderB2B) || 50,
-      notes: body.notes || undefined,
-      csdStatus: body.csdStatus || undefined,
+      minOrderB2B: Number(body.minOrderB2B) || 60,
     };
 
+    // If Supabase is configured, insert to Supabase too
+    if (isSupabaseConfigured()) {
+      try {
+        const supabase = createServerSupabaseClient();
+        if (supabase) {
+          await supabase.from('products').insert({
+            id: newProduct.id,
+            name: newProduct.name,
+            category: newProduct.category,
+            sku: newProduct.id.toUpperCase(),
+            description: newProduct.description,
+            specs: newProduct.longDescription,
+            original_price: newProduct.originalPrice || null,
+            discount_price: newProduct.price,
+            material: newProduct.material,
+            dimensions: newProduct.dimensions,
+            images: [newProduct.image, ...newProduct.gallery],
+            features: newProduct.features,
+            in_stock: newProduct.inStock,
+            rating: newProduct.rating,
+            reviews_count: newProduct.reviewsCount,
+          });
+        }
+      } catch (err) {
+        console.warn('Failed to insert product into Supabase:', err);
+      }
+    }
+
     products.unshift(newProduct);
-    writeProducts(products);
+    writeLocalProducts(products);
 
     return NextResponse.json({
       success: true,
       message: 'Product created successfully',
       product: newProduct,
-    }, { status: 201 });
-  } catch (err: any) {
-    return NextResponse.json(
-      { success: false, error: err.message || 'Internal server error' },
-      { status: 500 }
-    );
-  }
-}
-
-// PUT update existing product
-export async function PUT(req: NextRequest) {
-  try {
-    const body = await req.json();
-    if (!body.id) {
-      return NextResponse.json(
-        { success: false, error: 'Product ID is required for update' },
-        { status: 400 }
-      );
-    }
-
-    const products = readProducts();
-    const index = products.findIndex((p) => p.id === body.id);
-
-    if (index === -1) {
-      return NextResponse.json(
-        { success: false, error: 'Product not found' },
-        { status: 404 }
-      );
-    }
-
-    const existing = products[index];
-    const updatedProduct: Product = {
-      ...existing,
-      ...body,
-      price: Number(body.price) !== undefined ? Number(body.price) : existing.price,
-      originalPrice: Number(body.originalPrice) !== undefined ? Number(body.originalPrice) : existing.originalPrice,
-      rating: Number(body.rating) !== undefined ? Number(body.rating) : existing.rating,
-      reviewsCount: Number(body.reviewsCount) !== undefined ? Number(body.reviewsCount) : existing.reviewsCount,
-      minOrderB2B: Number(body.minOrderB2B) !== undefined ? Number(body.minOrderB2B) : existing.minOrderB2B,
-      inStock: body.inStock !== undefined ? Boolean(body.inStock) : existing.inStock,
-    };
-
-    products[index] = updatedProduct;
-    writeProducts(products);
-
-    return NextResponse.json({
-      success: true,
-      message: 'Product updated successfully',
-      product: updatedProduct,
     });
   } catch (err: any) {
     return NextResponse.json(
-      { success: false, error: err.message || 'Internal server error' },
-      { status: 500 }
-    );
-  }
-}
-
-// DELETE a product
-export async function DELETE(req: NextRequest) {
-  try {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get('id');
-
-    if (!id) {
-      return NextResponse.json(
-        { success: false, error: 'Product ID is required' },
-        { status: 400 }
-      );
-    }
-
-    const products = readProducts();
-    const index = products.findIndex((p) => p.id === id);
-
-    if (index === -1) {
-      return NextResponse.json(
-        { success: false, error: 'Product not found' },
-        { status: 404 }
-      );
-    }
-
-    const removed = products.splice(index, 1)[0];
-    writeProducts(products);
-
-    return NextResponse.json({
-      success: true,
-      message: `Product ${removed.name} deleted successfully`,
-      deletedId: id,
-    });
-  } catch (err: any) {
-    return NextResponse.json(
-      { success: false, error: err.message || 'Internal server error' },
-      { status: 500 }
-    );
-  }
-}
-
-// PATCH for resetting catalog or bulk actions
-export async function PATCH(req: NextRequest) {
-  try {
-    const body = await req.json();
-    if (body.action === 'reset') {
-      writeProducts(DEFAULT_PRODUCTS);
-      return NextResponse.json({
-        success: true,
-        message: 'Product catalog reset to default factory specifications',
-        count: DEFAULT_PRODUCTS.length,
-        products: DEFAULT_PRODUCTS,
-      });
-    }
-
-    return NextResponse.json({ success: false, error: 'Invalid action' }, { status: 400 });
-  } catch (err: any) {
-    return NextResponse.json(
-      { success: false, error: err.message || 'Internal server error' },
+      { success: false, error: err.message || 'Failed to create product' },
       { status: 500 }
     );
   }

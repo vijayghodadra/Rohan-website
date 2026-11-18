@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 
 export default function LoginPage() {
-  const { login, register, user, logout } = useAuth();
+  const { login, register, loginWithGoogle, user, logout } = useAuth();
   const [mode, setMode] = useState<'login' | 'register'>('login');
 
   // Form states
@@ -42,11 +42,13 @@ export default function LoginPage() {
     }
     setLoading(true);
     setFeedback(null);
-    setTimeout(async () => {
-      await login(email);
-      setFeedback({ text: 'Welcome back! You are now logged in.', type: 'success' });
-      setLoading(false);
-    }, 400);
+    const res = await login(email, password);
+    setLoading(false);
+    if (!res.success) {
+      setFeedback({ text: res.error || 'Failed to sign in. Please verify your credentials.', type: 'error' });
+      return;
+    }
+    setFeedback({ text: 'Welcome back! You are now logged in.', type: 'success' });
   };
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -57,15 +59,17 @@ export default function LoginPage() {
     }
     setLoading(true);
     setFeedback(null);
-    setTimeout(async () => {
-      await register({ name, email, phone });
-      setFeedback({ text: 'Account created successfully! Welcome to Roshan.', type: 'success' });
-      setLoading(false);
-    }, 500);
+    const res = await register({ name, email, phone }, password);
+    setLoading(false);
+    if (!res.success) {
+      setFeedback({ text: res.error || 'Registration failed.', type: 'error' });
+      return;
+    }
+    setFeedback({ text: 'Account created successfully! Welcome to Roshan.', type: 'success' });
   };
 
-  const handleGoogleSignIn = () => {
-    login('customer@example.com', 'Valued Customer');
+  const handleGoogleSignIn = async () => {
+    await loginWithGoogle();
   };
 
   return (

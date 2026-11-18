@@ -30,6 +30,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ImageIcon,
+  Database,
 } from 'lucide-react';
 
 const CATALOG_IMAGES = [
@@ -247,6 +248,25 @@ export default function AdminPage() {
     showToast('Catalog JSON exported successfully', 'info');
   };
 
+  const [syncingSupabase, setSyncingSupabase] = useState(false);
+  const handleSyncSupabase = async () => {
+    if (!confirm('Sync and upload all catalog products to your Supabase PostgreSQL database?')) return;
+    setSyncingSupabase(true);
+    try {
+      const res = await fetch('/api/admin/seed-supabase', { method: 'POST' });
+      const data = await res.json();
+      if (data.success) {
+        showToast(data.message || 'Successfully synced catalog to Supabase!', 'success');
+      } else {
+        alert('Supabase Notice:\n' + data.error);
+      }
+    } catch (err: any) {
+      showToast('Supabase connection failed: ' + err.message, 'error');
+    } finally {
+      setSyncingSupabase(false);
+    }
+  };
+
   return (
     <div className="pt-24 pb-20 min-h-screen bg-[#F7F5F0] text-roshan-obsidian">
       {/* Toast Notification */}
@@ -301,6 +321,16 @@ export default function AdminPage() {
             >
               <Download className="w-3.5 h-3.5 text-roshan-taupe" />
               <span>Export</span>
+            </button>
+
+            <button
+              onClick={handleSyncSupabase}
+              disabled={syncingSupabase}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-semibold bg-white border border-emerald-300 text-emerald-800 hover:bg-emerald-50 transition-all shadow-xs disabled:opacity-50"
+              title="Sync all products into Supabase PostgreSQL"
+            >
+              <Database className="w-3.5 h-3.5 text-emerald-600" />
+              <span>{syncingSupabase ? 'Syncing...' : 'Sync to Supabase'}</span>
             </button>
 
             <button

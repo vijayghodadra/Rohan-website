@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 
 export default function AuthModal() {
-  const { isAuthOpen, setIsAuthOpen, authMode, setAuthMode, login, register, user, logout } = useAuth();
+  const { isAuthOpen, setIsAuthOpen, authMode, setAuthMode, login, register, loginWithGoogle, user, logout } = useAuth();
 
   // Login form state
   const [loginEmail, setLoginEmail] = useState('');
@@ -48,12 +48,14 @@ export default function AuthModal() {
     }
     setLoginLoading(true);
     setMessage(null);
-    setTimeout(async () => {
-      await login(loginEmail);
-      setLoginLoading(false);
-      setMessage({ text: 'Welcome back! You are now signed in.', type: 'success' });
-      setTimeout(() => setIsAuthOpen(false), 800);
-    }, 400);
+    const res = await login(loginEmail, loginPassword);
+    setLoginLoading(false);
+    if (!res.success) {
+      setMessage({ text: res.error || 'Failed to sign in. Please verify your credentials.', type: 'error' });
+      return;
+    }
+    setMessage({ text: 'Welcome back! You are now signed in.', type: 'success' });
+    setTimeout(() => setIsAuthOpen(false), 700);
   };
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {
@@ -64,21 +66,25 @@ export default function AuthModal() {
     }
     setRegLoading(true);
     setMessage(null);
-    setTimeout(async () => {
-      await register({
+    const res = await register(
+      {
         name: regName,
         email: regEmail,
         phone: regPhone,
-      });
-      setRegLoading(false);
-      setMessage({ text: 'Account created successfully! Welcome to Roshan.', type: 'success' });
-      setTimeout(() => setIsAuthOpen(false), 800);
-    }, 500);
+      },
+      regPassword
+    );
+    setRegLoading(false);
+    if (!res.success) {
+      setMessage({ text: res.error || 'Registration failed.', type: 'error' });
+      return;
+    }
+    setMessage({ text: 'Account created successfully! Welcome to Roshan.', type: 'success' });
+    setTimeout(() => setIsAuthOpen(false), 700);
   };
 
-  const handleGoogleSignIn = () => {
-    login('customer@example.com', 'Valued Customer');
-    setIsAuthOpen(false);
+  const handleGoogleSignIn = async () => {
+    await loginWithGoogle();
   };
 
   return (
