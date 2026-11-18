@@ -10,14 +10,12 @@ import {
   Lock,
   User,
   Phone,
-  Building2,
   Eye,
   EyeOff,
   ArrowRight,
-  ShieldCheck,
-  CheckCircle2,
   Sparkles,
   ArrowLeft,
+  CheckCircle2,
 } from 'lucide-react';
 
 export default function LoginPage() {
@@ -33,8 +31,6 @@ export default function LoginPage() {
   // Register extra
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [businessName, setBusinessName] = useState('');
-  const [isWholesale, setIsWholesale] = useState(false);
 
   const [feedback, setFeedback] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
@@ -50,7 +46,7 @@ export default function LoginPage() {
       await login(email);
       setFeedback({ text: 'Welcome back! You are now logged in.', type: 'success' });
       setLoading(false);
-    }, 500);
+    }, 400);
   };
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -62,10 +58,10 @@ export default function LoginPage() {
     setLoading(true);
     setFeedback(null);
     setTimeout(async () => {
-      await register({ name, email, phone, businessName, isWholesale });
+      await register({ name, email, phone });
       setFeedback({ text: 'Account created successfully! Welcome to Roshan.', type: 'success' });
       setLoading(false);
-    }, 600);
+    }, 500);
   };
 
   const handleGoogleSignIn = () => {
@@ -102,7 +98,7 @@ export default function LoginPage() {
 
           <div className="p-6 sm:p-8">
             {/* Brand Logo & Header */}
-            <div className="flex flex-col items-center text-center mb-5">
+            <div className="flex flex-col items-center text-center mb-6">
               <div className="relative overflow-hidden rounded-xl border-2 border-[#E3C687]/60 shadow-md bg-[#BD0100] px-3.5 py-1.5 flex items-center justify-center mb-3">
                 <Image
                   src="/images/roshan-logo.png"
@@ -116,11 +112,6 @@ export default function LoginPage() {
               <h1 className="font-serif text-2xl sm:text-3xl font-extrabold text-stone-950 tracking-tight">
                 {mode === 'login' ? 'Customer Sign In' : 'Create Account'}
               </h1>
-              <p className="text-xs sm:text-sm text-stone-600 mt-1 max-w-xs font-medium">
-                {mode === 'login'
-                  ? 'Sign in to access your orders, saved items & wholesale carton rates.'
-                  : 'Join Roshan Privilege for direct Vadodara factory dispatch & wholesale quotes.'}
-              </p>
             </div>
 
             {/* Slider Pill Controls */}
@@ -331,33 +322,17 @@ export default function LoginPage() {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-xs font-bold text-stone-800 uppercase tracking-wider mb-1">Mobile Phone</label>
-                        <div className="relative flex items-center rounded-2xl bg-stone-50 border border-stone-300 focus-within:border-[#BD0100] focus-within:ring-2 focus-within:ring-[#BD0100]/20 focus-within:bg-white transition-all shadow-xs">
-                          <Phone className="w-4 h-4 text-stone-400 ml-3 shrink-0" />
-                          <input
-                            type="tel"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            placeholder="+91 98765..."
-                            className="w-full py-2.5 pl-2.5 pr-3 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 bg-transparent focus:outline-none font-medium"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-stone-800 uppercase tracking-wider mb-1">Store / Business</label>
-                        <div className="relative flex items-center rounded-2xl bg-stone-50 border border-stone-300 focus-within:border-[#BD0100] focus-within:ring-2 focus-within:ring-[#BD0100]/20 focus-within:bg-white transition-all shadow-xs">
-                          <Building2 className="w-4 h-4 text-stone-400 ml-3 shrink-0" />
-                          <input
-                            type="text"
-                            value={businessName}
-                            onChange={(e) => setBusinessName(e.target.value)}
-                            placeholder="Retailer Name"
-                            className="w-full py-2.5 pl-2.5 pr-3 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 bg-transparent focus:outline-none font-medium"
-                          />
-                        </div>
+                    <div>
+                      <label className="block text-xs font-bold text-stone-800 uppercase tracking-wider mb-1">Mobile Phone</label>
+                      <div className="relative flex items-center rounded-2xl bg-stone-50 border border-stone-300 focus-within:border-[#BD0100] focus-within:ring-2 focus-within:ring-[#BD0100]/20 focus-within:bg-white transition-all shadow-xs">
+                        <Phone className="w-4 h-4 text-stone-400 ml-3.5 shrink-0" />
+                        <input
+                          type="tel"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          placeholder="+91 98765 43210"
+                          className="w-full py-2.5 pl-3 pr-4 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 bg-transparent focus:outline-none font-medium"
+                        />
                       </div>
                     </div>
 
@@ -384,28 +359,10 @@ export default function LoginPage() {
                       </div>
                     </div>
 
-                    <label className="flex items-center gap-2.5 p-3 rounded-2xl bg-amber-50/90 border border-amber-300/80 cursor-pointer text-xs text-stone-900 transition-colors hover:bg-amber-100/80">
-                      <input
-                        type="checkbox"
-                        checked={isWholesale}
-                        onChange={(e) => setIsWholesale(e.target.checked)}
-                        className="w-4 h-4 rounded text-[#BD0100] focus:ring-[#BD0100] accent-[#BD0100]"
-                      />
-                      <div>
-                        <div className="font-bold text-stone-950 flex items-center gap-1.5">
-                          <span>Request B2B Wholesale Pricing</span>
-                          <span className="text-[10px] bg-amber-200 text-amber-900 px-1.5 py-0.2 rounded font-extrabold">GST</span>
-                        </div>
-                        <div className="text-[10px] text-stone-600 mt-0.5">
-                          Access carton quantity discounts & tax invoices directly from Vadodara plant.
-                        </div>
-                      </div>
-                    </label>
-
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full py-3.5 px-6 rounded-full font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-[#BD0100] via-[#D81E1E] to-[#BD0100] shadow-lg shadow-[#BD0100]/25 hover:shadow-xl hover:shadow-[#BD0100]/35 hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-75"
+                      className="w-full py-3.5 px-6 rounded-full font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-[#BD0100] via-[#D81E1E] to-[#BD0100] shadow-lg shadow-[#BD0100]/25 hover:shadow-xl hover:shadow-[#BD0100]/35 hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 pt-2 disabled:opacity-75"
                     >
                       <span>{loading ? 'Creating Account...' : 'Create Roshan Account'}</span>
                       <Sparkles className="w-4 h-4" />
@@ -413,18 +370,6 @@ export default function LoginPage() {
                   </motion.form>
                 )}
               </AnimatePresence>
-            </div>
-
-            {/* Trust Banner Footer */}
-            <div className="mt-6 pt-5 border-t border-stone-200 grid grid-cols-2 gap-3 text-xs text-stone-600">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="font-medium text-[11px]">100% Virgin Polymer</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#BD0100] shrink-0" />
-                <span className="font-medium text-[11px]">Vadodara Plant Dispatch</span>
-              </div>
             </div>
 
           </div>

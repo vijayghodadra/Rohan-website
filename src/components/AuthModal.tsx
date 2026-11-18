@@ -10,15 +10,13 @@ import {
   Lock,
   User,
   Phone,
-  Building2,
   Eye,
   EyeOff,
   ArrowRight,
-  ShieldCheck,
-  CheckCircle2,
   Sparkles,
   LogOut,
   ShoppingBag,
+  CheckCircle2,
 } from 'lucide-react';
 
 export default function AuthModal() {
@@ -34,10 +32,8 @@ export default function AuthModal() {
   const [regName, setRegName] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regPhone, setRegPhone] = useState('');
-  const [regBusiness, setRegBusiness] = useState('');
   const [regPassword, setRegPassword] = useState('');
   const [showRegPassword, setShowRegPassword] = useState(false);
-  const [isWholesale, setIsWholesale] = useState(false);
   const [regLoading, setRegLoading] = useState(false);
 
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
@@ -56,8 +52,8 @@ export default function AuthModal() {
       await login(loginEmail);
       setLoginLoading(false);
       setMessage({ text: 'Welcome back! You are now signed in.', type: 'success' });
-      setTimeout(() => setIsAuthOpen(false), 900);
-    }, 500);
+      setTimeout(() => setIsAuthOpen(false), 800);
+    }, 400);
   };
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {
@@ -73,13 +69,11 @@ export default function AuthModal() {
         name: regName,
         email: regEmail,
         phone: regPhone,
-        businessName: regBusiness,
-        isWholesale,
       });
       setRegLoading(false);
       setMessage({ text: 'Account created successfully! Welcome to Roshan.', type: 'success' });
-      setTimeout(() => setIsAuthOpen(false), 900);
-    }, 600);
+      setTimeout(() => setIsAuthOpen(false), 800);
+    }, 500);
   };
 
   const handleGoogleSignIn = () => {
@@ -122,7 +116,7 @@ export default function AuthModal() {
         <div className="overflow-y-auto no-scrollbar p-6 sm:p-8">
           
           {/* Header Brand Emblem */}
-          <div className="flex flex-col items-center text-center mb-5">
+          <div className="flex flex-col items-center text-center mb-6">
             <div className="relative overflow-hidden rounded-xl border-2 border-[#E3C687]/60 shadow-md bg-[#BD0100] px-3.5 py-1.5 flex items-center justify-center mb-3 group">
               <Image
                 src="/images/roshan-logo.png"
@@ -141,13 +135,11 @@ export default function AuthModal() {
                 ? 'Welcome Back'
                 : 'Create Account'}
             </h2>
-            <p className="text-xs sm:text-sm text-stone-600 mt-1 max-w-xs font-medium">
-              {user
-                ? `Signed in as ${user.name}`
-                : authMode === 'login'
-                ? 'Sign in to access your orders, saved items & wholesale carton rates.'
-                : 'Join Roshan Privilege for direct Vadodara factory dispatch & wholesale quotes.'}
-            </p>
+            {user && (
+              <p className="text-xs text-stone-600 mt-1 font-medium">
+                Signed in as {user.name}
+              </p>
+            )}
           </div>
 
           {/* If Already Logged In */}
@@ -162,18 +154,7 @@ export default function AuthModal() {
                   <div className="text-base font-extrabold text-stone-950">{user.name}</div>
                   <div className="text-xs text-stone-600 font-medium">{user.email}</div>
                   {user.phone && <div className="text-xs text-stone-500 mt-0.5">{user.phone}</div>}
-                  {user.businessName && (
-                    <div className="text-xs text-stone-500 mt-0.5 font-semibold">Store: {user.businessName}</div>
-                  )}
                 </div>
-                {user.isWholesale && (
-                  <div className="pt-2">
-                    <span className="text-[11px] font-bold text-amber-900 bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-md inline-flex items-center gap-1">
-                      <Sparkles className="w-3 h-3 text-amber-600" />
-                      Wholesale Tier Verified
-                    </span>
-                  </div>
-                )}
               </div>
 
               <div className="grid grid-cols-2 gap-3 pt-2">
@@ -401,34 +382,18 @@ export default function AuthModal() {
                         </div>
                       </div>
 
-                      {/* Phone & Business Name */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-xs font-bold text-stone-800 uppercase tracking-wider mb-1">Mobile Phone</label>
-                          <div className="relative flex items-center rounded-2xl bg-stone-50 border border-stone-300 focus-within:border-[#BD0100] focus-within:ring-2 focus-within:ring-[#BD0100]/20 focus-within:bg-white transition-all shadow-xs">
-                            <Phone className="w-4 h-4 text-stone-400 ml-3 shrink-0" />
-                            <input
-                              type="tel"
-                              value={regPhone}
-                              onChange={(e) => setRegPhone(e.target.value)}
-                              placeholder="+91 98765..."
-                              className="w-full py-2.5 pl-2.5 pr-3 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 bg-transparent focus:outline-none font-medium"
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <label className="block text-xs font-bold text-stone-800 uppercase tracking-wider mb-1">Store / Business</label>
-                          <div className="relative flex items-center rounded-2xl bg-stone-50 border border-stone-300 focus-within:border-[#BD0100] focus-within:ring-2 focus-within:ring-[#BD0100]/20 focus-within:bg-white transition-all shadow-xs">
-                            <Building2 className="w-4 h-4 text-stone-400 ml-3 shrink-0" />
-                            <input
-                              type="text"
-                              value={regBusiness}
-                              onChange={(e) => setRegBusiness(e.target.value)}
-                              placeholder="Retailer Name"
-                              className="w-full py-2.5 pl-2.5 pr-3 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 bg-transparent focus:outline-none font-medium"
-                            />
-                          </div>
+                      {/* Mobile Phone */}
+                      <div>
+                        <label className="block text-xs font-bold text-stone-800 uppercase tracking-wider mb-1">Mobile Phone</label>
+                        <div className="relative flex items-center rounded-2xl bg-stone-50 border border-stone-300 focus-within:border-[#BD0100] focus-within:ring-2 focus-within:ring-[#BD0100]/20 focus-within:bg-white transition-all shadow-xs">
+                          <Phone className="w-4 h-4 text-stone-400 ml-3.5 shrink-0" />
+                          <input
+                            type="tel"
+                            value={regPhone}
+                            onChange={(e) => setRegPhone(e.target.value)}
+                            placeholder="+91 98765 43210"
+                            className="w-full py-2.5 pl-3 pr-4 text-xs sm:text-sm text-stone-900 placeholder:text-stone-400 bg-transparent focus:outline-none font-medium"
+                          />
                         </div>
                       </div>
 
@@ -456,30 +421,11 @@ export default function AuthModal() {
                         </div>
                       </div>
 
-                      {/* Wholesale B2B Privilege Option */}
-                      <label className="flex items-center gap-2.5 p-3 rounded-2xl bg-amber-50/90 border border-amber-300/80 cursor-pointer text-xs text-stone-900 transition-colors hover:bg-amber-100/80">
-                        <input
-                          type="checkbox"
-                          checked={isWholesale}
-                          onChange={(e) => setIsWholesale(e.target.checked)}
-                          className="w-4 h-4 rounded text-[#BD0100] focus:ring-[#BD0100] accent-[#BD0100]"
-                        />
-                        <div>
-                          <div className="font-bold text-stone-950 flex items-center gap-1.5">
-                            <span>Request B2B Wholesale Pricing</span>
-                            <span className="text-[10px] bg-amber-200 text-amber-900 px-1.5 py-0.2 rounded font-extrabold">GST</span>
-                          </div>
-                          <div className="text-[10px] text-stone-600 mt-0.5">
-                            Access carton quantity discounts & tax invoices directly from Vadodara plant.
-                          </div>
-                        </div>
-                      </label>
-
                       {/* Submit Button */}
                       <button
                         type="submit"
                         disabled={regLoading}
-                        className="w-full py-3.5 px-6 rounded-full font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-[#BD0100] via-[#D81E1E] to-[#BD0100] shadow-lg shadow-[#BD0100]/25 hover:shadow-xl hover:shadow-[#BD0100]/35 hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-75"
+                        className="w-full py-3.5 px-6 rounded-full font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-[#BD0100] via-[#D81E1E] to-[#BD0100] shadow-lg shadow-[#BD0100]/25 hover:shadow-xl hover:shadow-[#BD0100]/35 hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2 pt-2 disabled:opacity-75"
                       >
                         <span>{regLoading ? 'Creating Account...' : 'Create Roshan Account'}</span>
                         <Sparkles className="w-4 h-4" />
@@ -490,18 +436,6 @@ export default function AuthModal() {
               </div>
             </>
           )}
-
-          {/* Trust Banner Footer */}
-          <div className="mt-6 pt-5 border-t border-stone-200 grid grid-cols-2 gap-3 text-xs text-stone-600">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span className="font-medium text-[11px]">100% Virgin Polymer</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#BD0100] shrink-0" />
-              <span className="font-medium text-[11px]">Vadodara Plant Dispatch</span>
-            </div>
-          </div>
 
         </div>
       </motion.div>
