@@ -5,6 +5,7 @@ import { Product } from '@/types';
 import { PRODUCTS as DEFAULT_PRODUCTS } from '@/data/products';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { isSupabaseConfigured } from '@/lib/supabase/client';
+import { getDbPool } from '@/lib/supabase/db';
 
 const dataFilePath = path.join(process.cwd(), 'src', 'data', 'products.json');
 
@@ -30,8 +31,52 @@ function writeLocalProducts(products: Product[]): boolean {
   }
 }
 
-// GET all products (Supabase with automatic local fallback)
+function mapRowToProduct(row: any): Product {
+  return {
+    id: row.id,
+    name: row.name,
+    category: row.category,
+    categorySlug: row.category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    price: Number(row.discount_price),
+    originalPrice: row.original_price ? Number(row.original_price) : undefined,
+    image: Array.isArray(row.images) && row.images.length > 0 ? row.images[0] : '/catalog/basin-01.png',
+    gallery: Array.isArray(row.images) ? row.images.slice(1) : [],
+    description: row.description || '',
+    longDescription: row.specs || '',
+    rating: Number(row.rating) || 4.8,
+    reviewsCount: row.reviews_count || 50,
+    colors: ['#EC4899', '#F9FAFB', '#2563EB', '#10B981', '#F59E0B'],
+    capacity: 'Standard Capacity',
+    material: row.material || '100% Virgin Grade Polymer',
+    dimensions: row.dimensions || 'Standard',
+    features: Array.isArray(row.features) ? row.features : [],
+    inStock: Boolean(row.in_stock),
+    minOrderB2B: 60,
+  };
+}
+
+// GET all products (PostgreSQL -> Supabase REST -> Local File)
 export async function GET() {
+  // 1. Try Direct PostgreSQL Connection
+  const pool = getDbPool();
+  if (pool) {
+    try {
+      const res = await pool.query('SELECT * FROM public.products ORDER BY created_at DESC');
+      if (res.rows && res.rows.length > 0) {
+        const mapped = res.rows.map(mapRowToProduct);
+        return NextResponse.json({
+          success: true,
+          source: 'supabase-postgresql',
+          count: mapped.length,
+          products: mapped,
+        });
+      }
+    } catch (err) {
+      console.warn('Direct PostgreSQL query error, trying fallback:', err);
+    }
+  }
+
+  // 2. Try Supabase REST Client
   if (isSupabaseConfigured()) {
     try {
       const supabase = createServerSupabaseClient();
@@ -42,52 +87,31 @@ export async function GET() {
           .order('created_at', { ascending: false });
 
         if (!error && data && data.length > 0) {
-          const mapped: Product[] = data.map((row: any) => ({
-            id: row.id,
-            name: row.name,
-            category: row.category,
-            categorySlug: row.category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-            price: Number(row.discount_price),
-            originalPrice: row.original_price ? Number(row.original_price) : undefined,
-            image: Array.isArray(row.images) && row.images.length > 0 ? row.images[0] : '/catalog/basin-01.png',
-            gallery: Array.isArray(row.images) ? row.images.slice(1) : [],
-            description: row.description || '',
-            longDescription: row.specs || '',
-            rating: Number(row.rating) || 4.8,
-            reviewsCount: row.reviews_count || 50,
-            colors: ['#EC4899', '#F9FAFB', '#2563EB', '#10B981', '#F59E0B'],
-            capacity: 'Standard Capacity',
-            material: row.material || '100% Virgin Grade Polymer',
-            dimensions: row.dimensions || 'Standard',
-            features: Array.isArray(row.features) ? row.features : [],
-            inStock: Boolean(row.in_stock),
-            minOrderB2B: 60,
-          }));
-
+          const mapped = data.map(mapRowToProduct);
           return NextResponse.json({
             success: true,
-            source: 'supabase',
+            source: 'supabase-rest',
             count: mapped.length,
             products: mapped,
           });
         }
       }
     } catch (err) {
-      console.warn('Supabase query failed, falling back to local file:', err);
+      console.warn('Supabase REST query failed, falling back to local file:', err);
     }
   }
 
-  // Fallback to local json file
+  // 3. Fallback to local json file
   const products = readLocalProducts();
   return NextResponse.json({
     success: true,
-    source: 'local',
+    source: 'local-file',
     count: products.length,
     products,
   });
 }
 
-// POST create new product (Writes to both Supabase and local file)
+// POST create new product
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -130,31 +154,41 @@ export async function POST(req: NextRequest) {
       minOrderB2B: Number(body.minOrderB2B) || 60,
     };
 
-    // If Supabase is configured, insert to Supabase too
-    if (isSupabaseConfigured()) {
+    // If PostgreSQL pool available, insert to PostgreSQL
+    const pool = getDbPool();
+    if (pool) {
       try {
-        const supabase = createServerSupabaseClient();
-        if (supabase) {
-          await supabase.from('products').insert({
-            id: newProduct.id,
-            name: newProduct.name,
-            category: newProduct.category,
-            sku: newProduct.id.toUpperCase(),
-            description: newProduct.description,
-            specs: newProduct.longDescription,
-            original_price: newProduct.originalPrice || null,
-            discount_price: newProduct.price,
-            material: newProduct.material,
-            dimensions: newProduct.dimensions,
-            images: [newProduct.image, ...newProduct.gallery],
-            features: newProduct.features,
-            in_stock: newProduct.inStock,
-            rating: newProduct.rating,
-            reviews_count: newProduct.reviewsCount,
-          });
-        }
+        await pool.query(
+          `INSERT INTO public.products (
+            id, name, category, sku, description, specs,
+            original_price, discount_price, material, dimensions,
+            images, features, in_stock, rating, reviews_count
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+          ON CONFLICT (id) DO UPDATE SET
+            name = EXCLUDED.name,
+            discount_price = EXCLUDED.discount_price,
+            in_stock = EXCLUDED.in_stock,
+            updated_at = NOW();`,
+          [
+            newProduct.id,
+            newProduct.name,
+            newProduct.category,
+            newProduct.id.toUpperCase(),
+            newProduct.description,
+            newProduct.longDescription,
+            newProduct.originalPrice || null,
+            newProduct.price,
+            newProduct.material,
+            newProduct.dimensions,
+            JSON.stringify([newProduct.image, ...newProduct.gallery]),
+            JSON.stringify(newProduct.features),
+            newProduct.inStock,
+            newProduct.rating,
+            newProduct.reviewsCount,
+          ]
+        );
       } catch (err) {
-        console.warn('Failed to insert product into Supabase:', err);
+        console.warn('Failed to insert product into PostgreSQL:', err);
       }
     }
 
