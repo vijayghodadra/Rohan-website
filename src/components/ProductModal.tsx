@@ -42,7 +42,7 @@ export default function ProductModal() {
   )}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
       {/* Liquid Glass Frosted Backdrop */}
       <div
         className="fixed inset-0 bg-roshan-obsidian/60 backdrop-blur-xl transition-opacity animate-in fade-in"
@@ -50,22 +50,23 @@ export default function ProductModal() {
       />
 
       {/* Modal Dialog Card */}
-      <div className="relative w-full max-w-3xl rounded-[2.5rem] bg-[#FAF9F5]/95 backdrop-blur-3xl border border-roshan-gold-champagne/60 shadow-2xl overflow-hidden z-10 my-8 animate-in zoom-in-95 duration-300">
+      <div className="relative w-full max-w-3xl rounded-[2rem] sm:rounded-[2.5rem] bg-[#FAF9F5]/95 backdrop-blur-3xl border border-roshan-gold-champagne/60 shadow-2xl overflow-hidden z-10 my-auto max-h-[92vh] flex flex-col animate-in zoom-in-95 duration-300">
         
         {/* Close Button */}
         <button
           onClick={() => setQuickViewProduct(null)}
-          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/80 hover:bg-white text-roshan-obsidian hover:text-roshan-crimson shadow-md transition-all"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 p-2 rounded-full bg-white/80 hover:bg-white text-roshan-obsidian hover:text-roshan-crimson shadow-md transition-all active:scale-90"
           aria-label="Close modal"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 sm:w-5 h-4 sm:h-5" />
         </button>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8">
+        <div className="overflow-y-auto p-5 sm:p-8">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8">
           
           {/* Left Column: Product Image */}
           <div className="md:col-span-6 flex flex-col justify-between">
-            <div className="relative aspect-square w-full rounded-3xl overflow-hidden bg-gradient-to-br from-[#F5EFE6] to-[#EFE4CD] shadow-inner border border-roshan-gold-champagne/40">
+            <div className="relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#F5EFE6] to-[#EFE4CD] shadow-inner border border-roshan-gold-champagne/40">
               <Image
                 src={product.image}
                 alt={product.name}
@@ -73,7 +74,7 @@ export default function ProductModal() {
                 className="object-cover object-center"
               />
               {product.badge && (
-                <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold text-white bg-roshan-crimson shadow-md">
+                <span className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold text-white bg-roshan-crimson shadow-md">
                   {product.badge}
                 </span>
               )}
@@ -255,6 +256,7 @@ export default function ProductModal() {
 
           </div>
 
+          </div>
         </div>
       </div>
     </div>

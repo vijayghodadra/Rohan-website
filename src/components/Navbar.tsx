@@ -447,7 +447,7 @@ export default function Navbar() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="text-xs font-bold text-roshan-obsidian group-hover:text-roshan-crimson flex items-center justify-between">
-                            <span>All Products Catalog (18+)</span>
+                            <span>All Products Catalog (135+)</span>
                             <ChevronRight className="w-3.5 h-3.5 text-roshan-taupe/60 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                           </div>
                           <div className="text-[11px] text-roshan-taupe leading-snug mt-0.5">
@@ -677,21 +677,28 @@ export default function Navbar() {
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
                   >
-                    Bathroom Products (7)
+                    Bathroom Products (49)
                   </Link>
                   <Link
                     href="/products?category=household"
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
                   >
-                    Household & Kitchen (11)
+                    Household Essentials (65)
+                  </Link>
+                  <Link
+                    href="/products?category=cleaning"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-xs font-medium text-roshan-obsidian hover:text-roshan-crimson transition-colors"
+                  >
+                    Cleaning Ranges (21)
                   </Link>
                   <Link
                     href="/products"
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-xs font-bold text-roshan-crimson hover:underline"
                   >
-                    View All 18+ Products →
+                    View Complete Catalog (135+ Products) →
                   </Link>
                 </div>
               </div>

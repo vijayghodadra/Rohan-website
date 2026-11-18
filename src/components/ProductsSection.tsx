@@ -91,10 +91,10 @@ function ProductsContent() {
 
         {/* E-Commerce Category Filter Tabs & Search Controls */}
         <ScrollReveal duration={0.8} distance={25} delay={0.1} amount={0.1}>
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8">
+          <div className="flex overflow-x-auto no-scrollbar sm:flex-wrap items-center justify-start sm:justify-center gap-2 py-1.5 px-3 sm:px-0 -mx-4 sm:mx-0 mb-6 sm:mb-8">
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              className={`shrink-0 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 selectedCategory === 'all'
                   ? 'bg-roshan-crimson text-white shadow-liquid-crimson scale-105'
                   : 'bg-white/80 backdrop-blur-md text-roshan-obsidian hover:bg-white border border-roshan-gold-champagne/40'
@@ -104,35 +104,35 @@ function ProductsContent() {
             </button>
             <button
               onClick={() => setSelectedCategory('bathroom')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              className={`shrink-0 flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 selectedCategory === 'bathroom'
                   ? 'bg-roshan-crimson text-white shadow-liquid-crimson scale-105'
                   : 'bg-white/80 backdrop-blur-md text-roshan-obsidian hover:bg-white border border-roshan-gold-champagne/40'
               }`}
             >
-              <Bath className="w-4 h-4" />
-              <span>Bathroom Products ({products.filter((p) => p.categorySlug === 'bathroom').length})</span>
+              <Bath className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
+              <span>Bathroom ({products.filter((p) => p.categorySlug === 'bathroom').length})</span>
             </button>
             <button
               onClick={() => setSelectedCategory('household')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              className={`shrink-0 flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 selectedCategory === 'household'
                   ? 'bg-roshan-crimson text-white shadow-liquid-crimson scale-105'
                   : 'bg-white/80 backdrop-blur-md text-roshan-obsidian hover:bg-white border border-roshan-gold-champagne/40'
               }`}
             >
-              <Home className="w-4 h-4" />
+              <Home className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
               <span>Household ({products.filter((p) => p.categorySlug === 'household').length})</span>
             </button>
             <button
               onClick={() => setSelectedCategory('cleaning')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              className={`shrink-0 flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 selectedCategory === 'cleaning'
                   ? 'bg-roshan-crimson text-white shadow-liquid-crimson scale-105'
                   : 'bg-white/80 backdrop-blur-md text-roshan-obsidian hover:bg-white border border-roshan-gold-champagne/40'
               }`}
             >
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
               <span>Cleaning ({products.filter((p) => p.categorySlug === 'cleaning').length})</span>
             </button>
           </div>
@@ -191,7 +191,7 @@ function ProductsContent() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 max-w-sm sm:max-w-none mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6 w-full mx-auto">
             {filteredProducts.map((product) => {
               const selectedColor = selectedColorMap[product.id] || (product.colors && product.colors.length > 0 ? product.colors[0] : '#7C1620');
               const currentPrice = product.price || 0;
@@ -201,27 +201,27 @@ function ProductsContent() {
               return (
                 <div
                   key={product.id}
-                  className="group relative rounded-[2rem] sm:rounded-3xl bg-white/90 backdrop-blur-xl border border-roshan-gold-champagne/40 hover:border-roshan-crimson/50 shadow-glass-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col justify-between h-full"
+                  className="group relative rounded-2xl sm:rounded-3xl bg-white/90 backdrop-blur-xl border border-roshan-gold-champagne/40 hover:border-roshan-crimson/50 shadow-glass-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col justify-between h-full"
                 >
                   {/* Liquid Glass Hover Sheen */}
                   <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-transparent via-white/20 to-transparent" />
 
                   {/* Card Top: Badges & Image */}
-                  <div className="relative p-3">
-                    <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-gradient-to-br from-[#FAF9F5] to-[#EFE4CD] shadow-inner">
+                  <div className="relative p-2 sm:p-3">
+                    <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-br from-[#FAF9F5] to-[#EFE4CD] shadow-inner">
                       <Image
                         src={product.image}
                         alt={product.name}
                         fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="object-cover object-center group-hover:scale-108 transition-transform duration-700 ease-out"
                       />
 
                       {/* Top Badges */}
-                      <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
+                      <div className="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 flex flex-col gap-1 items-start">
                         {product.badge && (
                           <span
-                            className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold text-white shadow-md ${
+                            className={`px-1.5 sm:px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold text-white shadow-md ${
                               product.badge === 'Bestseller'
                                 ? 'bg-roshan-crimson'
                                 : product.badge === 'New'
@@ -236,7 +236,7 @@ function ProductsContent() {
                             {product.badge}
                           </span>
                         )}
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/90 text-roshan-crimson shadow-sm">
+                        <span className="px-1.5 sm:px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold bg-white/95 text-roshan-crimson shadow-xs">
                           {discountPercent}% OFF
                         </span>
                       </div>
@@ -247,7 +247,7 @@ function ProductsContent() {
                           e.stopPropagation();
                           toggleWishlist(product);
                         }}
-                        className={`absolute top-2.5 right-2.5 p-2 rounded-full backdrop-blur-md shadow-md transition-all active:scale-90 ${
+                        className={`absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5 p-1.5 sm:p-2 rounded-full backdrop-blur-md shadow-md transition-all active:scale-90 ${
                           isInWishlist(product.id)
                             ? 'bg-roshan-crimson text-white shadow-lg'
                             : 'bg-white/90 text-roshan-obsidian hover:text-roshan-crimson hover:bg-white'
@@ -255,13 +255,13 @@ function ProductsContent() {
                         title={isInWishlist(product.id) ? 'Remove from Wishlist' : 'Save to Wishlist'}
                         aria-label="Wishlist"
                       >
-                        <Heart className={`w-3.5 h-3.5 ${isInWishlist(product.id) ? 'fill-white' : ''}`} />
+                        <Heart className={`w-3 sm:w-3.5 h-3 sm:h-3.5 ${isInWishlist(product.id) ? 'fill-white' : ''}`} />
                       </button>
 
                       {/* Quick View Button overlay on image */}
                       <button
                         onClick={() => setQuickViewProduct(product)}
-                        className="absolute bottom-2.5 right-2.5 p-2 rounded-full bg-white/90 backdrop-blur-md text-roshan-obsidian hover:text-roshan-crimson hover:bg-white shadow-md transition-all opacity-90 group-hover:opacity-100"
+                        className="hidden sm:flex absolute bottom-2.5 right-2.5 p-2 rounded-full bg-white/90 backdrop-blur-md text-roshan-obsidian hover:text-roshan-crimson hover:bg-white shadow-md transition-all opacity-90 group-hover:opacity-100"
                         title="Quick View Product"
                         aria-label="Quick View"
                       >
@@ -271,59 +271,53 @@ function ProductsContent() {
                   </div>
 
                   {/* Card Body: Details */}
-                  <div className="p-4 pt-1 flex flex-col flex-1 justify-between">
+                  <div className="p-2.5 sm:p-4 pt-1 sm:pt-1 flex flex-col flex-1 justify-between">
                     <div>
                       {/* Category tag & Rating */}
-                      <div className="flex items-center justify-between text-[11px] mb-1">
-                        <span className="font-semibold text-roshan-crimson uppercase tracking-wider text-[10px]">
+                      <div className="flex items-center justify-between text-[10px] sm:text-[11px] mb-1">
+                        <span className="font-semibold text-roshan-crimson uppercase tracking-wider text-[9px] sm:text-[10px] truncate max-w-[65%]">
                           {product.category}
                         </span>
-                        <div className="flex items-center gap-1 text-roshan-amber">
-                          <Star className="w-3.5 h-3.5 fill-current" />
-                          <span className="font-bold text-roshan-obsidian">{product.rating}</span>
-                          <span className="text-roshan-taupe">({product.reviewsCount})</span>
+                        <div className="flex items-center gap-0.5 sm:gap-1 text-roshan-amber">
+                          <Star className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-current" />
+                          <span className="font-bold text-roshan-obsidian text-[10px] sm:text-xs">{product.rating ?? 4.8}</span>
                         </div>
                       </div>
 
                       {/* Product Title */}
                       <h3
                         onClick={() => setQuickViewProduct(product)}
-                        className="font-serif text-base font-bold text-roshan-obsidian hover:text-roshan-crimson cursor-pointer transition-colors line-clamp-1"
+                        className="font-serif text-xs sm:text-base font-bold text-roshan-obsidian hover:text-roshan-crimson cursor-pointer transition-colors line-clamp-1 sm:line-clamp-2"
                         title={product.name}
                       >
                         {product.name}
                       </h3>
 
-                      {/* Short Description */}
-                      <p className="text-xs text-roshan-taupe line-clamp-2 mt-1 leading-relaxed">
-                        {product.description}
-                      </p>
-
-                      {/* Specs / CSD Tags */}
-                      <div className="flex flex-wrap items-center gap-1.5 mt-2">
+                      {/* Specs / Capacity Tag */}
+                      <div className="flex items-center gap-1.5 mt-1 sm:mt-1.5">
                         {product.capacity && (
-                          <span className="text-[10px] font-medium text-roshan-obsidian/80 bg-[#FAF9F5] px-2 py-0.5 rounded-md border border-roshan-gold-champagne/40">
+                          <span className="text-[9px] sm:text-[10px] font-medium text-roshan-obsidian/80 bg-[#FAF9F5] px-1.5 py-0.5 rounded border border-roshan-gold-champagne/40 truncate">
                             {product.capacity}
                           </span>
                         )}
                         {product.csdStatus && (
-                          <span className="text-[9px] font-bold text-[#1E3A8A] bg-[#1E3A8A]/10 px-2 py-0.5 rounded-md border border-[#1E3A8A]/25">
-                            ★ {product.csdStatus}
+                          <span className="hidden sm:inline-block text-[9px] font-bold text-[#1E3A8A] bg-[#1E3A8A]/10 px-1.5 py-0.5 rounded border border-[#1E3A8A]/25">
+                            ★ CSD
                           </span>
                         )}
                       </div>
 
                       {/* Color swatches */}
                       {product.colors && product.colors.length > 0 && (
-                        <div className="flex items-center gap-1.5 mt-3">
-                          <span className="text-[10px] text-roshan-taupe mr-1">Shades:</span>
-                          {product.colors.map((c, i) => (
+                        <div className="flex items-center gap-1 sm:gap-1.5 mt-2">
+                          <span className="text-[9px] sm:text-[10px] text-roshan-taupe mr-0.5 hidden sm:inline">Shades:</span>
+                          {product.colors.slice(0, 4).map((c, i) => (
                             <button
                               key={i}
                               onClick={() => handleColorSelect(product.id, c)}
-                              className={`w-3.5 h-3.5 rounded-full border transition-all ${
+                              className={`w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full border transition-all ${
                                 selectedColor === c
-                                  ? 'border-roshan-obsidian scale-125 shadow-sm'
+                                  ? 'border-roshan-obsidian scale-110 shadow-xs'
                                   : 'border-transparent opacity-80 hover:opacity-100'
                               }`}
                               style={{ backgroundColor: c }}
@@ -336,19 +330,19 @@ function ProductsContent() {
                     </div>
 
                     {/* Price & Add to Cart Footer */}
-                    <div className="mt-4 pt-3 border-t border-roshan-taupe-border flex items-center justify-between">
+                    <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-roshan-taupe-border flex items-center justify-between gap-1">
                       <div>
-                        <div className="flex items-baseline gap-2">
-                          <span className="font-serif text-lg font-bold text-roshan-obsidian">
+                        <div className="flex items-baseline gap-1 sm:gap-2">
+                          <span className="font-serif text-sm sm:text-lg font-bold text-roshan-obsidian">
                             ₹{currentPrice.toLocaleString('en-IN')}
                           </span>
-                          <span className="text-xs text-roshan-taupe line-through">
+                          <span className="text-[10px] sm:text-xs text-roshan-taupe line-through">
                             ₹{origPrice.toLocaleString('en-IN')}
                           </span>
                         </div>
                         {product.minOrderB2B && (
-                          <div className="text-[10px] text-roshan-gold-deep font-semibold">
-                            MOQ: {product.minOrderB2B} pcs (B2B)
+                          <div className="text-[9px] sm:text-[10px] text-roshan-gold-deep font-semibold hidden sm:block">
+                            MOQ: {product.minOrderB2B} pcs
                           </div>
                         )}
                       </div>
@@ -356,9 +350,9 @@ function ProductsContent() {
                       {/* Add to Cart button */}
                       <button
                         onClick={() => addToCart(product, 1, selectedColor)}
-                        className="relative overflow-hidden group/btn px-3.5 py-2 rounded-full font-medium text-xs text-white bg-gradient-to-r from-roshan-crimson to-roshan-crimson-light shadow-md hover:shadow-lg transition-all duration-300 active:scale-95 flex items-center gap-1.5"
+                        className="relative overflow-hidden group/btn px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full font-medium text-[11px] sm:text-xs text-white bg-gradient-to-r from-roshan-crimson to-roshan-crimson-light shadow-xs sm:shadow-md hover:shadow-lg transition-all duration-300 active:scale-95 flex items-center gap-1 shrink-0"
                       >
-                        <ShoppingBag className="w-3.5 h-3.5" />
+                        <ShoppingBag className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
                         <span>Add</span>
                       </button>
                     </div>

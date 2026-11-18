@@ -52,10 +52,10 @@ export default function AboutUsSection() {
           </p>
 
           {/* Quick Section Navigation Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-8">
+          <div className="flex overflow-x-auto no-scrollbar sm:flex-wrap items-center justify-start sm:justify-center gap-2 py-1.5 px-3 sm:px-0 -mx-4 sm:mx-0 mt-8">
             <button
               onClick={() => setActiveTab('vision')}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              className={`shrink-0 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 activeTab === 'vision'
                   ? 'bg-roshan-crimson text-white shadow-liquid-crimson'
                   : 'bg-white/80 backdrop-blur-md text-roshan-obsidian hover:bg-white border border-roshan-gold-champagne/40'
@@ -65,7 +65,7 @@ export default function AboutUsSection() {
             </button>
             <button
               onClick={() => setActiveTab('manufacturing')}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              className={`shrink-0 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 activeTab === 'manufacturing'
                   ? 'bg-roshan-crimson text-white shadow-liquid-crimson'
                   : 'bg-white/80 backdrop-blur-md text-roshan-obsidian hover:bg-white border border-roshan-gold-champagne/40'
@@ -75,7 +75,7 @@ export default function AboutUsSection() {
             </button>
             <button
               onClick={() => setActiveTab('customers')}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              className={`shrink-0 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 activeTab === 'customers'
                   ? 'bg-roshan-crimson text-white shadow-liquid-crimson'
                   : 'bg-white/80 backdrop-blur-md text-roshan-obsidian hover:bg-white border border-roshan-gold-champagne/40'
@@ -85,7 +85,7 @@ export default function AboutUsSection() {
             </button>
             <button
               onClick={() => setActiveTab('director')}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              className={`shrink-0 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
                 activeTab === 'director'
                   ? 'bg-roshan-crimson text-white shadow-liquid-crimson'
                   : 'bg-white/80 backdrop-blur-md text-roshan-obsidian hover:bg-white border border-roshan-gold-champagne/40'

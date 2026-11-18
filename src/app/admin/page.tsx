@@ -390,10 +390,10 @@ export default function AdminPage() {
             </div>
 
             {/* Quick Filter Badges */}
-            <div className="flex flex-wrap items-center gap-1.5">
+            <div className="flex overflow-x-auto no-scrollbar sm:flex-wrap items-center gap-1.5 py-1">
               <button
                 onClick={() => { setSelectedCategory('all'); setPage(1); }}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   selectedCategory === 'all'
                     ? 'bg-roshan-crimson text-white shadow-xs'
                     : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
@@ -403,7 +403,7 @@ export default function AdminPage() {
               </button>
               <button
                 onClick={() => { setSelectedCategory('bathroom'); setPage(1); }}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   selectedCategory === 'bathroom'
                     ? 'bg-roshan-crimson text-white shadow-xs'
                     : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
@@ -413,7 +413,7 @@ export default function AdminPage() {
               </button>
               <button
                 onClick={() => { setSelectedCategory('household'); setPage(1); }}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   selectedCategory === 'household'
                     ? 'bg-roshan-crimson text-white shadow-xs'
                     : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
@@ -423,7 +423,7 @@ export default function AdminPage() {
               </button>
               <button
                 onClick={() => { setSelectedCategory('cleaning'); setPage(1); }}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   selectedCategory === 'cleaning'
                     ? 'bg-roshan-crimson text-white shadow-xs'
                     : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
@@ -498,8 +498,8 @@ export default function AdminPage() {
         ) : viewMode === 'table' ? (
           /* Table View */
           <div className="bg-white rounded-3xl border border-roshan-gold-champagne/50 shadow-sm overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
+            <div className="overflow-x-auto no-scrollbar">
+              <table className="w-full min-w-[720px] text-left border-collapse">
                 <thead>
                   <tr className="bg-stone-50/80 border-b border-roshan-gold-champagne/40 text-[11px] font-bold text-roshan-taupe uppercase tracking-wider">
                     <th className="py-3.5 px-4">Product</th>
