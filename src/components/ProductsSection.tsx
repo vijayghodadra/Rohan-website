@@ -43,13 +43,25 @@ function ProductsContent() {
     setSelectedColorMap((prev) => ({ ...prev, [productId]: color }));
   };
 
+  const isBathroom = (p: Product) =>
+    p.categorySlug === 'bathroom' ||
+    (p.category && p.category.toLowerCase().includes('bath'));
+
+  const isHousehold = (p: Product) =>
+    p.categorySlug === 'household' ||
+    (p.category && (p.category.toLowerCase().includes('house') || p.category.toLowerCase().includes('home')));
+
+  const isCleaning = (p: Product) =>
+    p.categorySlug === 'cleaning' ||
+    (p.category && (p.category.toLowerCase().includes('clean') || p.category.toLowerCase().includes('wiper') || p.category.toLowerCase().includes('broom')));
+
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       // Category filter
       if (selectedCategory !== 'all') {
-        if (selectedCategory === 'bathroom' && product.categorySlug !== 'bathroom') return false;
-        if (selectedCategory === 'household' && product.categorySlug !== 'household') return false;
-        if (selectedCategory === 'cleaning' && product.categorySlug !== 'cleaning') return false;
+        if (selectedCategory === 'bathroom' && !isBathroom(product)) return false;
+        if (selectedCategory === 'household' && !isHousehold(product)) return false;
+        if (selectedCategory === 'cleaning' && !isCleaning(product)) return false;
       }
       // Search query filter
       if (searchQuery.trim()) {
@@ -111,7 +123,7 @@ function ProductsContent() {
               }`}
             >
               <Bath className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
-              <span>Bathroom ({products.filter((p) => p.categorySlug === 'bathroom').length})</span>
+              <span>Bathroom ({products.filter(isBathroom).length})</span>
             </button>
             <button
               onClick={() => setSelectedCategory('household')}
@@ -122,7 +134,7 @@ function ProductsContent() {
               }`}
             >
               <Home className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
-              <span>Household ({products.filter((p) => p.categorySlug === 'household').length})</span>
+              <span>Household ({products.filter(isHousehold).length})</span>
             </button>
             <button
               onClick={() => setSelectedCategory('cleaning')}
@@ -133,7 +145,7 @@ function ProductsContent() {
               }`}
             >
               <Sparkles className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
-              <span>Cleaning ({products.filter((p) => p.categorySlug === 'cleaning').length})</span>
+              <span>Cleaning ({products.filter(isCleaning).length})</span>
             </button>
           </div>
 

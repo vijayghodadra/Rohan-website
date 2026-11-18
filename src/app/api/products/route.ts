@@ -31,14 +31,31 @@ function writeLocalProducts(products: Product[]): boolean {
   }
 }
 
+function getCategorySlug(categoryName: string): 'bathroom' | 'household' | 'cleaning' {
+  const lower = (categoryName || '').toLowerCase();
+  if (lower.includes('bath')) return 'bathroom';
+  if (lower.includes('clean') || lower.includes('wiper') || lower.includes('broom')) return 'cleaning';
+  return 'household';
+}
+
+function getCategoryDisplay(categoryName: string): 'Bathroom Products' | 'Household Products' | 'Cleaning Products' {
+  const lower = (categoryName || '').toLowerCase();
+  if (lower.includes('bath')) return 'Bathroom Products';
+  if (lower.includes('clean') || lower.includes('wiper') || lower.includes('broom')) return 'Cleaning Products';
+  return 'Household Products';
+}
+
 function mapRowToProduct(row: any): Product {
+  const price = Number(row.discount_price) || 0;
+  const originalPrice = row.original_price ? Number(row.original_price) : Math.round(price * 1.3);
+
   return {
     id: row.id,
     name: row.name,
-    category: row.category,
-    categorySlug: row.category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-    price: Number(row.discount_price),
-    originalPrice: row.original_price ? Number(row.original_price) : undefined,
+    category: getCategoryDisplay(row.category),
+    categorySlug: getCategorySlug(row.category),
+    price,
+    originalPrice,
     image: Array.isArray(row.images) && row.images.length > 0 ? row.images[0] : '/catalog/basin-01.png',
     gallery: Array.isArray(row.images) ? row.images.slice(1) : [],
     description: row.description || '',
@@ -132,13 +149,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const price = Number(body.price) || 0;
+    const originalPrice = body.originalPrice ? Number(body.originalPrice) : Math.round(price * 1.3);
+
     const newProduct: Product = {
       id,
       name: body.name,
-      category: body.category,
-      categorySlug: body.categorySlug || body.category.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-      price: Number(body.price) || 0,
-      originalPrice: body.originalPrice ? Number(body.originalPrice) : undefined,
+      category: getCategoryDisplay(body.category),
+      categorySlug: getCategorySlug(body.categorySlug || body.category),
+      price,
+      originalPrice,
       image: body.image || '/catalog/basin-01.png',
       gallery: body.gallery || [],
       description: body.description || '',

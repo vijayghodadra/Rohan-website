@@ -19,3 +19,4 @@ export function getDbPool(): Pool | null {
 
   return pool;
 }
+

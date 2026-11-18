@@ -98,9 +98,9 @@ export default function AdminPage() {
   // Metrics
   const metrics = useMemo(() => {
     const total = products.length;
-    const bathroom = products.filter((p) => p.categorySlug === 'bathroom').length;
-    const household = products.filter((p) => p.categorySlug === 'household').length;
-    const cleaning = products.filter((p) => p.categorySlug === 'cleaning').length;
+    const bathroom = products.filter((p) => p.categorySlug === 'bathroom' || (p.category && p.category.toLowerCase().includes('bath'))).length;
+    const household = products.filter((p) => p.categorySlug === 'household' || (p.category && (p.category.toLowerCase().includes('house') || p.category.toLowerCase().includes('home')))).length;
+    const cleaning = products.filter((p) => p.categorySlug === 'cleaning' || (p.category && (p.category.toLowerCase().includes('clean') || p.category.toLowerCase().includes('wiper') || p.category.toLowerCase().includes('broom')))).length;
     const inStock = products.filter((p) => p.inStock).length;
     const csdCount = products.filter((p) => p.csdStatus || p.badge === 'CSD Listed' || (p.notes && p.notes.includes('CSD'))).length;
     const avgPrice = total > 0 ? Math.round(products.reduce((acc, p) => acc + p.price, 0) / total) : 0;
@@ -111,7 +111,11 @@ export default function AdminPage() {
   const filteredProducts = useMemo(() => {
     return products
       .filter((p) => {
-        if (selectedCategory !== 'all' && p.categorySlug !== selectedCategory) return false;
+        if (selectedCategory !== 'all') {
+          if (selectedCategory === 'bathroom' && p.categorySlug !== 'bathroom' && !p.category.toLowerCase().includes('bath')) return false;
+          if (selectedCategory === 'household' && p.categorySlug !== 'household' && !p.category.toLowerCase().includes('house')) return false;
+          if (selectedCategory === 'cleaning' && p.categorySlug !== 'cleaning' && !p.category.toLowerCase().includes('clean')) return false;
+        }
         if (stockFilter === 'inStock' && !p.inStock) return false;
         if (stockFilter === 'outOfStock' && p.inStock) return false;
         if (stockFilter === 'csd' && !p.csdStatus && p.badge !== 'CSD Listed' && (!p.notes || !p.notes.includes('CSD'))) return false;
