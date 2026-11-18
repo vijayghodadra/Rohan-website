@@ -23,3 +23,4 @@ export function createClient(): SupabaseClient | null {
 
   return client;
 }
+

@@ -170,3 +170,4 @@ CREATE POLICY "Admins can view inquiries"
 CREATE POLICY "Users manage own wishlist" 
   ON public.wishlist FOR ALL 
   USING (auth.uid() = user_id);
+

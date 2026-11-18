@@ -36,3 +36,4 @@ export function createServerSupabaseClient(): SupabaseClient | null {
     }
   );
 }
+
