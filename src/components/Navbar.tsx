@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 import { COMPANY_INFO } from '@/data/company';
 import {
   ShoppingBag,
@@ -27,10 +28,12 @@ import {
   Layers,
   PhoneCall,
   SlidersHorizontal,
+  User,
 } from 'lucide-react';
 
 export default function Navbar() {
   const { totalItems, setIsCartOpen, totalWishlistItems, setIsWishlistOpen } = useCart();
+  const { user, setIsAuthOpen, setAuthMode } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -472,24 +475,29 @@ export default function Navbar() {
               <PhoneCall className="w-3.5 h-3.5 shrink-0 text-roshan-gold" />
               <span>Contact Us</span>
             </Link>
-
-            {/* 5. Admin Panel */}
-            <Link
-              href="/admin"
-              className={`flex items-center gap-1.5 rounded-full font-semibold text-roshan-obsidian hover:text-roshan-crimson hover:bg-black/5 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] whitespace-nowrap ${
-                scrolled ? 'px-2 py-1 text-xs' : 'px-3 py-1 text-xs'
-              }`}
-              onClick={closeDropdownImmediately}
-              title="Admin Panel - Manage Products"
-            >
-              <SlidersHorizontal className="w-3.5 h-3.5 shrink-0 text-roshan-gold" />
-              <span>Admin</span>
-            </Link>
           </div>
 
-          {/* Right: Wishlist & Cart Actions */}
-          <div className="flex items-center gap-1.5 sm:gap-2 relative z-10 shrink-0 whitespace-nowrap">
+          {/* Right: User Auth, Wishlist & Cart Actions */}
+          <div className="flex items-center gap-1 sm:gap-2 relative z-10 shrink-0 whitespace-nowrap">
             
+            {/* 0. Login & Register Trigger */}
+            <button
+              onClick={() => {
+                setAuthMode('login');
+                setIsAuthOpen(true);
+              }}
+              className={`relative rounded-full text-roshan-obsidian hover:text-roshan-crimson hover:bg-roshan-crimson-blush/60 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] border border-transparent hover:border-roshan-gold-champagne/40 active:scale-95 flex items-center gap-1.5 shrink-0 ${
+                scrolled ? 'p-1.5 sm:px-2.5 sm:py-1' : 'p-2 sm:px-3 sm:py-1.5'
+              }`}
+              aria-label="Account sign in or register"
+              title={user ? `Signed in as ${user.name}` : 'Login / Register'}
+            >
+              <User className={scrolled ? 'w-4 h-4 text-roshan-gold' : 'w-4 h-4 sm:w-4.5 sm:h-4.5 text-roshan-gold'} />
+              <span className="hidden md:inline text-xs font-semibold">
+                {user ? user.name.split(' ')[0] : 'Login / Register'}
+              </span>
+            </button>
+
             {/* 1. Wishlist Trigger with Badge */}
             <button
               onClick={() => setIsWishlistOpen(true)}
@@ -570,14 +578,25 @@ export default function Navbar() {
                 </button>
               </div>
 
-              {/* Quick Actions (Wishlist & Cart) */}
-              <div className="grid grid-cols-2 gap-2.5">
+              {/* Quick Actions (Account, Wishlist & Cart) */}
+              <div className="grid grid-cols-3 gap-2">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setAuthMode('login');
+                    setIsAuthOpen(true);
+                  }}
+                  className="flex flex-col items-center justify-center gap-1 p-2 rounded-2xl bg-white border border-roshan-gold-champagne/50 text-[11px] font-bold text-roshan-obsidian shadow-2xs hover:bg-roshan-crimson hover:text-white transition-all group"
+                >
+                  <User className="w-4 h-4 text-roshan-gold group-hover:text-white transition-colors" />
+                  <span className="truncate max-w-full">{user ? user.name.split(' ')[0] : 'Sign In'}</span>
+                </button>
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     setIsWishlistOpen(true);
                   }}
-                  className="flex items-center justify-center gap-2 p-2.5 rounded-2xl bg-white border border-roshan-gold-champagne/50 text-xs font-bold text-roshan-obsidian shadow-2xs hover:bg-roshan-crimson hover:text-white transition-all group"
+                  className="flex flex-col items-center justify-center gap-1 p-2 rounded-2xl bg-white border border-roshan-gold-champagne/50 text-[11px] font-bold text-roshan-obsidian shadow-2xs hover:bg-roshan-crimson hover:text-white transition-all group"
                 >
                   <Heart className="w-4 h-4 text-roshan-crimson group-hover:text-white transition-colors" />
                   <span>Wishlist ({totalWishlistItems})</span>
@@ -587,7 +606,7 @@ export default function Navbar() {
                     setMobileMenuOpen(false);
                     setIsCartOpen(true);
                   }}
-                  className="flex items-center justify-center gap-2 p-2.5 rounded-2xl bg-white border border-roshan-gold-champagne/50 text-xs font-bold text-roshan-obsidian shadow-2xs hover:bg-roshan-crimson hover:text-white transition-all group"
+                  className="flex flex-col items-center justify-center gap-1 p-2 rounded-2xl bg-white border border-roshan-gold-champagne/50 text-[11px] font-bold text-roshan-obsidian shadow-2xs hover:bg-roshan-crimson hover:text-white transition-all group"
                 >
                   <ShoppingBag className="w-4 h-4 text-roshan-crimson group-hover:text-white transition-colors" />
                   <span>Bag ({totalItems})</span>
@@ -710,19 +729,6 @@ export default function Navbar() {
                 className="text-xs font-bold text-roshan-obsidian hover:text-roshan-crimson pt-2.5 border-t border-roshan-taupe-border flex items-center justify-between transition-colors"
               >
                 <span>4. Contact Us</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-
-              {/* 5. Admin Panel */}
-              <Link
-                href="/admin"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-xs font-bold text-roshan-gold-deep hover:text-roshan-crimson pt-2.5 border-t border-roshan-taupe-border flex items-center justify-between transition-colors"
-              >
-                <div className="flex items-center gap-1.5">
-                  <SlidersHorizontal className="w-3.5 h-3.5 text-roshan-gold" />
-                  <span>Admin Panel (Manage Products)</span>
-                </div>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 

@@ -15,6 +15,7 @@ import {
   MessageCircle,
   ExternalLink,
   ChevronRight,
+  Lock,
 } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 
@@ -239,11 +240,20 @@ export default function Footer() {
               © {new Date().getFullYear()} {COMPANY_INFO.fullName}. All rights reserved.
             </div>
 
-            <div className="flex items-center gap-4 sm:gap-6 text-center sm:text-right">
+            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-5 text-center sm:text-right">
               <span>Vadodara, Gujarat, India</span>
               <span>•</span>
               <Link href="/contact" className="hover:text-roshan-gold transition-colors">
                 B2B Inquiries
+              </Link>
+              <span>•</span>
+              <Link
+                href="/admin"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-roshan-gold/40 text-roshan-gold hover:text-white hover:bg-roshan-crimson hover:border-roshan-crimson transition-all font-semibold text-[11px]"
+                title="Management & Admin Access"
+              >
+                <Lock className="w-3 h-3" />
+                <span>Admin Login</span>
               </Link>
               <span>•</span>
               <button

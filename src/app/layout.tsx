@@ -2,11 +2,13 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { ProductProvider } from '@/context/ProductContext';
 import { CartProvider } from '@/context/CartContext';
+import { AuthProvider } from '@/context/AuthContext';
 import LiquidGlassBackground from '@/components/LiquidGlassBackground';
 import Navbar from '@/components/Navbar';
 import CartDrawer from '@/components/CartDrawer';
 import WishlistDrawer from '@/components/WishlistDrawer';
 import ProductModal from '@/components/ProductModal';
+import AuthModal from '@/components/AuthModal';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
@@ -48,26 +50,29 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col relative bg-[#FAF9F5] text-[#1B1512] font-sans">
-        <ProductProvider>
-          <CartProvider>
-            {/* Ambient iPhone Liquid Glass Fluid Dynamics */}
-            <LiquidGlassBackground />
+        <AuthProvider>
+          <ProductProvider>
+            <CartProvider>
+              {/* Ambient iPhone Liquid Glass Fluid Dynamics */}
+              <LiquidGlassBackground />
 
-            {/* Morphing Full-Width to Small Rounded Capsule Header Nav */}
-            <Navbar />
+              {/* Morphing Full-Width to Small Rounded Capsule Header Nav */}
+              <Navbar />
 
-            {/* Main Page Content */}
-            <main className="flex-1 z-10">{children}</main>
+              {/* Main Page Content */}
+              <main className="flex-1 z-10">{children}</main>
 
-            {/* Interactive Drawers & Modals */}
-            <CartDrawer />
-            <WishlistDrawer />
-            <ProductModal />
+              {/* Interactive Drawers & Modals */}
+              <CartDrawer />
+              <WishlistDrawer />
+              <ProductModal />
+              <AuthModal />
 
-            {/* Luxury Obsidian & Gold Footer */}
-            <Footer />
-          </CartProvider>
-        </ProductProvider>
+              {/* Luxury Obsidian & Gold Footer */}
+              <Footer />
+            </CartProvider>
+          </ProductProvider>
+        </AuthProvider>
       </body>
     </html>
   );
