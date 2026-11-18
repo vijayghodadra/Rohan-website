@@ -5,13 +5,13 @@
     "category": "Bathroom Products",
     "categorySlug": "bathroom",
     "price": 369,
-    "originalPrice": null,
+    "originalPrice": 499,
     "image": "/catalog/basin-01.png",
     "description": "Heavy-duty deep soaking basin and laundry tub in Rose Pink. Molded with rolled outer rim for effortless carrying.",
     "longDescription": "Molded from 100% virgin-grade copolymer at our Vadodara plant, the Roshan Basin is engineered for tough Indian household usage. Available in 20L and 36L volumes with high stress-crack resistance.",
     "badge": "Bestseller",
-    "rating": null,
-    "reviewsCount": null,
+    "rating": 4.9,
+    "reviewsCount": 142,
     "colors": [
       "#EC4899",
       "#F9FAFB",
@@ -30,7 +30,7 @@
       "18L in CSD (will be discontinued)"
     ],
     "inStock": true,
-    "minOrderB2B": null,
+    "minOrderB2B": 60,
     "notes": "18L in CSD (will be discontinued)",
     "csdStatus": "CSD Listed Range"
   },

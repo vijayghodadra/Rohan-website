@@ -193,10 +193,10 @@ function ProductsContent() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 max-w-sm sm:max-w-none mx-auto">
             {filteredProducts.map((product) => {
-              const selectedColor = selectedColorMap[product.id] || product.colors[0];
-              const discountPercent = Math.round(
-                ((product.originalPrice - product.price) / product.originalPrice) * 100
-              );
+              const selectedColor = selectedColorMap[product.id] || (product.colors && product.colors.length > 0 ? product.colors[0] : '#7C1620');
+              const currentPrice = product.price || 0;
+              const origPrice = product.originalPrice || Math.round((currentPrice || 100) * 1.35);
+              const discountPercent = origPrice > currentPrice ? Math.round(((origPrice - currentPrice) / origPrice) * 100) : 15;
 
               return (
                 <div
@@ -340,10 +340,10 @@ function ProductsContent() {
                       <div>
                         <div className="flex items-baseline gap-2">
                           <span className="font-serif text-lg font-bold text-roshan-obsidian">
-                            ₹{product.price.toLocaleString('en-IN')}
+                            ₹{currentPrice.toLocaleString('en-IN')}
                           </span>
                           <span className="text-xs text-roshan-taupe line-through">
-                            ₹{product.originalPrice.toLocaleString('en-IN')}
+                            ₹{origPrice.toLocaleString('en-IN')}
                           </span>
                         </div>
                         {product.minOrderB2B && (

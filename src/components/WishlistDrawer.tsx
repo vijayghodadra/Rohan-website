@@ -127,7 +127,7 @@ export default function WishlistDrawer() {
                     <div className="flex items-center justify-between pt-1">
                       <div>
                         <span className="font-bold text-xs text-roshan-crimson">
-                          ₹{product.price.toLocaleString('en-IN')}
+                          ₹{(product.price || 0).toLocaleString('en-IN')}
                         </span>
                         {product.originalPrice && (
                           <span className="text-[10px] text-roshan-taupe line-through ml-1.5">

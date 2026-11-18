@@ -127,7 +127,7 @@ export default function CartDrawer() {
                     </h4>
                     <div className="flex items-center gap-2 mt-0.5">
                       <span className="text-xs font-bold text-roshan-crimson">
-                        ₹{(item.product.price * item.quantity).toLocaleString('en-IN')}
+                        ₹{((item.product?.price || 0) * (item.quantity || 1)).toLocaleString('en-IN')}
                       </span>
                       {item.selectedColor && (
                         <span className="flex items-center gap-1 text-[10px] text-roshan-taupe">

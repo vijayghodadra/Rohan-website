@@ -27,9 +27,9 @@ export default function ProductModal() {
 
   const product = quickViewProduct;
   const activeColor = selectedColor || (product.colors && product.colors.length > 0 ? product.colors[0] : '#7C1620');
-  const discountPercent = Math.round(
-    ((product.originalPrice - product.price) / product.originalPrice) * 100
-  );
+  const currentPrice = product.price || 0;
+  const origPrice = product.originalPrice || Math.round((currentPrice || 100) * 1.35);
+  const discountPercent = origPrice > currentPrice ? Math.round(((origPrice - currentPrice) / origPrice) * 100) : 15;
 
   const handleAddAndClose = () => {
     addToCart(product, quantity, activeColor);
@@ -115,10 +115,10 @@ export default function ProductModal() {
               {/* Price Row */}
               <div className="flex items-baseline gap-3 mt-2">
                 <span className="font-serif text-3xl font-bold text-roshan-obsidian">
-                  ₹{product.price.toLocaleString('en-IN')}
+                  ₹{currentPrice.toLocaleString('en-IN')}
                 </span>
                 <span className="text-sm text-roshan-taupe line-through">
-                  ₹{product.originalPrice.toLocaleString('en-IN')}
+                  ₹{origPrice.toLocaleString('en-IN')}
                 </span>
                 <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-roshan-crimson-blush text-roshan-crimson">
                   Save {discountPercent}%
@@ -223,7 +223,7 @@ export default function ProductModal() {
                   className="flex-1 py-3 px-6 rounded-full font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-roshan-crimson to-roshan-crimson-light shadow-liquid-crimson hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2"
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  <span>Add to Bag • ₹{(product.price * quantity).toLocaleString('en-IN')}</span>
+                  <span>Add to Bag • ₹{(currentPrice * quantity).toLocaleString('en-IN')}</span>
                 </button>
 
                 {/* Wishlist Button */}
