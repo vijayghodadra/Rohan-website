@@ -1,5 +1,36 @@
 [
   {
+    "id": "roshan-item-137",
+    "name": "bucket20",
+    "category": "Cleaning Products",
+    "categorySlug": "cleaning",
+    "price": 299,
+    "originalPrice": 399,
+    "image": "/catalog/planter-round-01.png",
+    "gallery": [],
+    "description": "Engineered with 100% virgin-grade polymer for durable everyday usage.",
+    "longDescription": "Manufactured at our Vadodara injection moulding facility with high stress-crack resistance and smooth hygienic finish.",
+    "rating": 4.8,
+    "reviewsCount": 100,
+    "colors": [
+      "#EC4899",
+      "#F9FAFB",
+      "#2563EB",
+      "#10B981",
+      "#F59E0B"
+    ],
+    "capacity": "Standard Capacity",
+    "material": "100% Virgin Grade Polypropylene",
+    "dimensions": "30 x 30 x 30 cm",
+    "features": [
+      "100% Virgin Grade Polymer",
+      "High impact strength",
+      "Ergonomic comfortable design"
+    ],
+    "inStock": true,
+    "minOrderB2B": 60
+  },
+  {
     "id": "roshan-basin-01",
     "name": "Roshan Deep Basin & Laundry Tub (20L) - Rose Pink",
     "category": "Bathroom Products",
